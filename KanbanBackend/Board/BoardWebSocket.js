@@ -33,7 +33,7 @@ wsserver.on('connection', ws => {
             });
         }
     });
-    ws.on('clsoe', (code, msg) => {
+    ws.on('close', (code, msg) => {
         console.log("Connection closing:", code, msg);
     });
 })
