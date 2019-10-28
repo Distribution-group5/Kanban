@@ -18,24 +18,34 @@ let connectedClients = [];
 wsserver.on('connection', ws => {
     console.log('New client connected');
     ws.on('message', msg => {
-        const parsedMsg = JSON.parse(msg);
-        if (parsedMsg.messageType === 'InitialMessage') {
-            connectedClients.push({ Board: parsedMsg.BoardID, WebSocket: ws });
-            ws.send(JSON.stringify(boards.find(x => x.id === parsedMsg.BoardID)));
-        } else {
-            const newBoardState = JSON.parse(parsedMsg.newBoardState);
-            let currentBoardState = boards.find(x => x.id === newBoardState.id);
-            currentBoardState.readJson(newBoardState);
-            connectedClients.forEach(x => {
-                if (x.Board === newBoardState.id) {
-                    x.ws.send(JSON.stringify(newBoardState));
-                }
-            });
+        try {
+            const parsedMsg = JSON.parse(msg);
+            if (parsedMsg.messageType === 'InitialMessage') {
+                connectedClients.push({ Board: parsedMsg.BoardID, WebSocket: ws });
+                ws.send(JSON.stringify(boards.find(x => x.id === parsedMsg.BoardID)));
+            } else {
+                const newBoardState = JSON.parse(parsedMsg.newBoardState);
+                let currentBoardState = boards.find(x => x.id === newBoardState.id);
+                currentBoardState.readJson(newBoardState);
+                connectedClients.forEach(x => {
+                    if (x.Board === newBoardState.id) {
+                        x.ws.send(JSON.stringify(newBoardState));
+                    }
+                });
+            }
+        } catch (error) {
+            console.log(`The following message caused an error: ${msg} \n The error: ${error.message}`);
+            ws.send("An error occured");
         }
     });
+
     ws.on('close', (code, msg) => {
         console.log("Connection closing:", code, msg);
     });
+
+    ws.onerror = function (event) {
+        console.log(`An error occured. ${ws._socket.remoteAddress} caused the following error: ${event.message}`);
+    }
 })
 
 
