@@ -6,7 +6,7 @@ boardRouter.post('/DeleteBoard', function (req, res) {
 });
 
 boardRouter.post('/InviteToBoard', function (req, res) {
-
+    res.send("Hej!");
 });
 
 
