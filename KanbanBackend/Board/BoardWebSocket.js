@@ -1,4 +1,3 @@
-
 let startWebsocket = function () {
     const { Server } = require('ws');
     const Kanban = require('./DataStructures.js');

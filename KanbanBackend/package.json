@@ -1,0 +1,12 @@
+{
+  "name": "https-test-project",
+  "description": "A simple https server built with express",
+  "version": "0.0.1",
+  "main": "https-server.js",
+  "dependencies": {
+    "express": "^4.17.1",
+    "websocket": "^1.0.30",
+    "filesystem": "^2.2.2",
+    "mysql": "^2.17.1"
+  }
+}
