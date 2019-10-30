@@ -23,6 +23,10 @@ export class BoardComponent implements OnInit {
         this.Columns = Columns;
       }
 
+      get BoardID() {
+        return this.id;
+      }
+
       get NumberOfColumns() {
         return this.Columns.length;
       }
