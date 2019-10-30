@@ -13,7 +13,9 @@ export class LoginComponent implements OnInit {
   }
   onClickSubmit(formData){
     alert('Your username is: ' + formData.username + "password:" + formData.password);
-    
+      let req = new XMLHttpRequest();
+      req.open("POST", "http://localhost:8080/login/"); // optional 3rd arg
+      req.send("username is: " + formData.username + "password is: " + formData.password);
     }
 
 }
