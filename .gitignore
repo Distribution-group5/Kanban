@@ -9,5 +9,10 @@ KanbanBackend/.vs/KanbanBackend/v15/.suo
 .vs/slnx.sqlite
 .vs/slnx.sqlite
 .vs/slnx.sqlite
+.vs/Kanban/v16/.suo
+.vs/slnx.sqlite
+.vs/Kanban/v16/.suo
+/node_modules
+/package-lock.json
 DBInfo.txt
 KanbanBackend/DBInfo.txt
