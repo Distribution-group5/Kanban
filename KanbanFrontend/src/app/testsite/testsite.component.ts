@@ -16,7 +16,8 @@ export class TestsiteComponent implements OnInit {
   
   }
   myFunction(){
-  let testy = document.getElementById("textfield1").value;
+  console.log(document.getElementById("demo").innerText, "is changed to")
+  let testy = document.getElementById("textfield1").innerText;
   console.log(testy);
   document.getElementById("demo").innerHTML = testy;
 
