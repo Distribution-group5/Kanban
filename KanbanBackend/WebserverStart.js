@@ -11,4 +11,4 @@ webSocket.startWebsocket();
 app.use('/Board', boardController);
 app.use('/User', userController);
 
-app.listen(8080);
+app.listen(4040);
