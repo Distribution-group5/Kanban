@@ -56,7 +56,7 @@ export class BoardComponent implements OnInit {
       }
     }
 
-    this.kanbanBoard = new KanbanBoard(1, "Example", [new KanbanCard(1, "E", "", [], Date.now(), Date.now())])
+    this.kanbanBoard = new KanbanBoard(1, "Example", [new KanbanCard(1, "E", "", [], Date.now(), Date.now())]);
   }
 
 }
