@@ -1,8 +1,10 @@
-var express = require('express');
-var boardRouter = express.Router();
+const express = require('express');
+const boardRouter = express.Router();
+const DBConnectionClass = require('../DatabaseConnection');
+let Connection = DBConnectionClass.connection;
 
 boardRouter.post('/DeleteBoard', function (req, res) {
-
+   
 });
 
 boardRouter.post('/InviteToBoard', function (req, res) {
