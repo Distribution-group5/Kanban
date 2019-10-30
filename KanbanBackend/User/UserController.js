@@ -4,7 +4,6 @@ const fs = require('fs');
 const mysql = require('mysql');
 let dbInfo = fs.readFileSync('./DBInfo.txt', 'utf8');
 let dbInfoArray = dbInfo.split(",");
-
 userRouter.put('/CreateUser', function (req, res, next) {
     let username = req.body.Username;
     let password = req.body.Password;
@@ -31,8 +30,9 @@ userRouter.put('/CreateUser', function (req, res, next) {
 });
 
 userRouter.post('/login', function (req, res){
-res.send('login connected')
-console.log("REQUEST GOTTEN DATA IS: " + req.body)
+    let username = req.body.username;
+    let password = req.body.password;
+console.log("REQUEST GOTTEN DATA IS: " + username + ": " + password)
 });
 
 
