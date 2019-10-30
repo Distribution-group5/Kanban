@@ -11,5 +11,20 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
+  onClickSubmit(formData){
+    alert('Your username is: ' + formData.username + "password:" + formData.password);
+    
+    }
 
+}
+
+export class TestClass{
+  onClickSubmit(formData){
+  alert('Your username is: ' + formData.username);
+  }
+  //async loginTestMethod(Username: string, Password: String){
+    //let req = new XMLHttpRequest();
+        //req.open("POST", "http://localhost:8080/login/"); // optional 3rd arg
+        //req.send("TESTDATAHEJ");
+  //}
 }
