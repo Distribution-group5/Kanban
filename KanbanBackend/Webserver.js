@@ -8,13 +8,14 @@ io.on("connection", socket => {
     let previousId;
     const safeJoin = currentId => {
         socket.leave(previousId)
-        socket.join(currentId)
+        socket.join(currentId, () => console.log(`Socket ${socket.id} joined room ${currentId}`));
         previousId = currentId;
-    };
+    }
 
     socket.on("getKanbanBoard", kanBanId => {
         safeJoin(kanBanId);
         socket.emit("board", kanbanBoards[kanBanId]);
+        
     });
 
     socket.on("editKanbanBoard", kanBoard => {
@@ -22,9 +23,11 @@ io.on("connection", socket => {
         socket.to(kanBaord.id).emit("board", kanBoard);
     });
 
-    socket.on('editTest', );
+    io.emit('kanbanBoards', Object.keys(kanbanBoards));
 
-    http.listen(8080), () => {
-        console.log('listening on port 8080');
-    };
+    
+});
+
+http.listen(4444, () => {
+    console.log('listening on port 4444');
 });
