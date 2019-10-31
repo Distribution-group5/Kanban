@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
-  kanbanBoard = new KanbanBoard(1, "Example", [[new KanbanCard(1, "E", "content1", [], Date.now(), Date.now())], [new KanbanCard(2, "EE", "content2", [], Date.now(), Date.now())]]);
+  kanbanBoard = new KanbanBoard(1, "Example", [[new KanbanCard(1, "Card1 title", "This is the content1", ["Bob", "Berta"], Date.now(), Date.now()), new KanbanCard(3, "Card3 title", "This is the content3", ["Kurt", "Troels"], Date.now(), Date.now())], [new KanbanCard(2, "Card2 title", "content2", ["Niels", "Hans"], Date.now(), Date.now())]]);
 
 
   constructor() { }
@@ -17,7 +17,7 @@ export class BoardComponent implements OnInit {
 
 }
 
-class KanbanBoard {
+export class KanbanBoard {
   id: number;
   Title: string;
   Columns: Array<Array<KanbanCard>>;
@@ -43,7 +43,7 @@ class KanbanBoard {
   }
 }
 
-class KanbanCard {
+export class KanbanCard {
   id: number;
   Title: string;
   Content: string;
