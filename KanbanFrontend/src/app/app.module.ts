@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CookieService } from 'ngx-cookie-service';
 import { BoardComponent } from './board/board.component';
 import { LoginComponent } from './login/login.component';
 
@@ -10,14 +11,14 @@ import { LoginComponent } from './login/login.component';
   declarations: [
     AppComponent,
     BoardComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -29,11 +29,39 @@ userRouter.put('/CreateUser', function (req, res, next) {
     });
 });
 
-userRouter.post('/login', function (req, res){
+userRouter.post('/login', function (req, res, next){
     let username = req.body.username;
     let password = req.body.password;
+    console.log("Connecting to database:");
+    let con = mysql.createConnection({
+        host: dbInfoArray[0],
+        user: dbInfoArray[1],
+        password: dbInfoArray[2],
+        database: 'KanbanDatabase'
+    });
+    con.connect(function(err){
+        if (err) next (err)
+        let sql = `SELECT * FROM Users WHERE username = '${username}'
+        AND password = '${password}'`;
+        console.log(sql)
+        con.query(sql, function(err, result){
+            if(err) next(err)
+        else{
+            if(result.length > 0){
+                res.status(200).send("COOKIE TEST TRUE")
+                console.log("Sending 200 back")
+
+            }
+            else{
+                res.status(403).send()
+                console.log("Sending 403 back")
+            }
+        }
+    });
+});
 console.log("REQUEST GOTTEN DATA IS: " + username + ": " + password)
 });
+
 
 
 
