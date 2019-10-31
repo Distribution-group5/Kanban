@@ -1,42 +1,38 @@
-import { Component, OnInit } from '@angular/core';
-import { WebsocketService } from "../websocket.service";
-import { TestcommunicationService } from "../testcommunication.service"
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { BoardService } from '../services/board.service';
+import { Subscription } from 'rxjs';
+import { Board } from '../models/board';
+import { startWith } from 'rxjs/operators';
 
 
 @Component({
   selector: 'app-testsite',
   templateUrl: './testsite.component.html',
   styleUrls: ['./testsite.component.css'],
-  providers: [WebsocketService, TestcommunicationService]
 })
-export class TestsiteComponent implements OnInit {
+export class TestsiteComponent implements OnInit, OnDestroy {
 
-  constructor(private testCommunicationService: TestcommunicationService) {  
-    testCommunicationService.messages.subscribe(msg => {
-      console.log("Response from websocket: " + msg)
-
-    });
-
-  }
-
-  private message = {
-    author: "tutorialedge",
-    message: "this is a test message"
-  };
-
-  sendMsg() {
-    console.log("new message from client to websocket: ", this.message);
-    this.testCommunicationService.messages.next(this.message);
-    this.message.message = "";
-  }
+  board: Board;
+  private _docSub: Subscription;
+  constructor(private boardService: BoardService) {  }
 
   ngOnInit() {
-  
+    this._docSub = this.boardService.currentBoard.pipe(
+      startWith({ id: '',  board: 'bla bla'})
+      ).subscribe(board => board = board);
   }
+
+  ngOnDestroy() {
+    this._docSub.unsubscribe();
+  }
+
+  editKanbanboard(){
+    this.boardService.editKanbanBoard(this.board);
+  }
+
   myFunction(){
   let testy = (<HTMLInputElement>document.getElementById("textfield1")).value;
   console.log(testy);
-  this.sendMsg();
   document.getElementById("demo").innerHTML = testy;
 
 }
