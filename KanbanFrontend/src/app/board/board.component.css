@@ -1,9 +1,9 @@
 * {
-    box-sizing: border-box;
-  }
-  
-  .column {
-    float: left;
-    width: 250px;
-    padding: 10px;
-  }
+  box-sizing: border-box;
+}
+
+.column {
+  float: left;
+  width: 250px;
+  padding: 10px;
+}

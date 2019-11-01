@@ -7,7 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BoardComponent implements OnInit {
 
-  kanbanBoard = new KanbanBoard(1, "Example", [[new KanbanCard(1, "Card1 title", "This is the content1", ["Bob", "Berta"], Date.now(), Date.now()), new KanbanCard(3, "Card3 title", "This is the content3", ["Kurt", "Troels"], Date.now(), Date.now())], [new KanbanCard(2, "Card2 title", "content2", ["Niels", "Hans"], Date.now(), Date.now())]]);
+  kanbanBoard = new KanbanBoard(1, "Example", [
+    [new KanbanCard(1, "Card1 title", "This is the content1", ["Bob", "Berta"], Date.now(), Date.now()), new KanbanCard(3, "Card3 title", "This is the content3", ["Kurt", "Troels"], Date.now(), Date.now())], 
+    [new KanbanCard(2, "Card2 title", "content2", ["Niels", "Hans"], Date.now(), Date.now())],
+    [new KanbanCard(2, "Card4 title", "content4", ["John"], Date.now(), Date.now())]]);
 
 
   constructor() { }
