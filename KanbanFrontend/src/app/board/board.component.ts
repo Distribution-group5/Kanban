@@ -42,6 +42,12 @@ export class KanbanBoard {
     return MaxRows;
   }
 
+  moveCard(theCard:KanbanCard/* , column:number, row:number */){
+    // this.Columns[0].splice(0,1);
+    
+    console.log(theCard);
+  }
+
   readJson(json) {
     Object.assign(this, json);
   }
