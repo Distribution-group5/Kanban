@@ -13,35 +13,36 @@ export class LoginComponent implements OnInit {
   }
   ngOnInit() {
   }
-  onClickSubmit(formData){
+  async onClickSubmit(formData){
     alert('Your username is: ' + formData.username + "password:" + formData.password);  
-    let req = new XMLHttpRequest();
-    let cookieValue: string = "test"
-    req.onreadystatechange = function(){  
-    if(req.readyState!== 4) return;
-    if(req.status >= 200 && req.status < 300){
-      cookieValue = req.responseText;
-      console.log("RESPONSE IS: " + cookieValue)
+
+    try{
+      formData = JSON.stringify(formData)
+      const data = await postData('http://localhost:8080/user/login/',formData);
+      this.cookie.set('data',data.username)
+      console.log(data)
+      console.log(JSON.stringify(data))
     }
-    if(req.status == 403){
-      console.log("ACCESS DENIED")
+    catch(error){
+      console.error(error)
     }
+  
+    async function postData(url = '', data = ''){
+      console.log("Data to be send is" + data + url)
+      const response = await fetch(url,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: data
+      });
+      
+      return await response.json();
     }
-    req.open("POST", "http://localhost:8080/user/login/")  // optional 3rd arg
-      console.log(JSON.stringify(formData));
-      req.setRequestHeader("Content-Type", "application/json");
-      req.send(JSON.stringify(formData));
   }
-
 }
-
 export class TestClass{
   onClickSubmit(formData){
   alert('Your username is: ' + formData.username);
   }
-  //async loginTestMethod(Username: string, Password: String){
-    //let req = new XMLHttpRequest();
-        //req.open("POST", "http://localhost:8080/login/"); // optional 3rd arg
-        //req.send("TESTDATAHEJ");
-  //}
 }

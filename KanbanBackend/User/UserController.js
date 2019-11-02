@@ -30,6 +30,7 @@ userRouter.put('/CreateUser', function (req, res, next) {
 });
 
 userRouter.post('/login', function (req, res, next){
+    console.log(req.body)
     let username = req.body.username;
     let password = req.body.password;
     console.log("Connecting to database:");
@@ -40,6 +41,7 @@ userRouter.post('/login', function (req, res, next){
         database: 'KanbanDatabase'
     });
     con.connect(function(err){
+        console.log(req.body)
         if (err) next (err)
         let sql = `SELECT * FROM Users WHERE username = '${username}'
         AND password = '${password}'`;
@@ -48,7 +50,7 @@ userRouter.post('/login', function (req, res, next){
             if(err) next(err)
         else{
             if(result.length > 0){
-                res.status(200).send("COOKIE TEST TRUE")
+                res.send({ username: `${username}` })
                 console.log("Sending 200 back")
 
             }
