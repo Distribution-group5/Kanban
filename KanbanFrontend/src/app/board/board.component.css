@@ -14,5 +14,5 @@
   background-color: seagreen;
   /* height: 600px; */
   white-space: nowrap;
-  overflow: scroll;
+  overflow: auto;
 }
