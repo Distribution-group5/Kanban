@@ -9,6 +9,7 @@
 
 <div class="row">
   <div class="column" *ngFor="let column of kanbanBoard.Columns">
+    <!-- <h3>Column title</h3> -->
     <app-card *ngFor="let card of column" [card]=card></app-card>
   </div>
 </div>
