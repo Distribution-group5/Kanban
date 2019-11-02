@@ -3,7 +3,16 @@
 }
 
 .column {
-  float: left;
+  /* float: left; */
   width: 250px;
   padding: 10px;
+  border: 2px solid #ff0000;
+  display: inline-table;
+}
+
+.row{
+  background-color: seagreen;
+  /* height: 600px; */
+  white-space: nowrap;
+  overflow: scroll;
 }
