@@ -42,16 +42,28 @@ export class KanbanBoard {
     return MaxRows;
   }
 
+  get numberOfCards(){
+    let amount = 0;
+    this.Columns.forEach(x => amount += x.length);
+    return amount;
+  }
+
   moveCard(theCard:KanbanCard){
     for (let column in this.Columns){
       for(let card in this.Columns[column]){
         if(this.Columns[column][card] === theCard){
-          this.Columns[column].splice(Number(card),1);
+          //this.Columns[column].splice(Number(card),1);
+
         }
       }
     }
     
     console.log(theCard);
+  }
+
+  createCard(column:number){
+    let c = new KanbanCard(this.numberOfCards+1, "Card Title", "","",new Date(), new Date());
+    this.Columns[column][this.Columns[column].length] = c;
   }
 
   readJson(json) {

@@ -10,5 +10,9 @@
   <div class="column" *ngFor="let column of kanbanBoard.Columns">
     <!-- <h3>Column title</h3> -->
     <app-card *ngFor="let card of column" [card]=card (click)="kanbanBoard.moveCard(card)"></app-card>
+    <p align="center">
+      <button (click)="kanbanBoard.createCard(kanbanBoard.Columns.indexOf(column))">Create card</button>
+    </p>
+    
   </div>
 </div>
