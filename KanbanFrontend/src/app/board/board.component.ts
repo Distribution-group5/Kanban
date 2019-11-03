@@ -53,7 +53,6 @@ export class KanbanBoard {
       for(let card in this.Columns[column]){
         if(this.Columns[column][card] === theCard){
           //this.Columns[column].splice(Number(card),1);
-
         }
       }
     }
@@ -63,7 +62,13 @@ export class KanbanBoard {
 
   createCard(column:number){
     let c = new KanbanCard(this.numberOfCards+1, "Card Title", "","",new Date(), new Date());
-    this.Columns[column][this.Columns[column].length] = c;
+    if(column < this.Columns.length){
+      this.Columns[column][this.Columns[column].length] = c;
+    }else{
+      this.Columns.push([]);
+      this.Columns[column][0] = c;
+    }
+    
   }
 
   readJson(json) {
