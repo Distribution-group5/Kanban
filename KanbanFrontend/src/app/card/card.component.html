@@ -1,6 +1,18 @@
-<div style=background-color:tan>
+<div>
+    <h4>
+      <textarea id="CardHeader" (keyup)="autogrow($event)" name="message" [(ngModel)]="card.Title" (input)="raiseCardUpdate()"></textarea>
+    </h4>
+    <h5>Description</h5>
+    <textarea (keyup)="autogrow($event)" [(ngModel)]="card.Content" (input)="raiseCardUpdate()">{{card.Content}}</textarea>
+    <h5>Assignee(s)</h5>
+    <textarea (keyup)="autogrow($event)" [(ngModel)]="card.Assignees" (input)="raiseCardUpdate()">{{card.Assignees}}</textarea>
+    <h5>Date Created</h5>
+    <div id="Date">{{card.DateCreated}}</div>
+
+  <!--
     <h4>{{card.Title}}</h4>
         <p>{{card.Content}}</p>
         <p>Assignees: {{card.Assignees}} <br>
-        Date created: {{card.DateCreated}}</p>
+        Date created: {{DateCreated}}</p>
+      -->
 </div>
