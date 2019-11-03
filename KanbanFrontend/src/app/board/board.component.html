@@ -1,20 +1,19 @@
 <p>This is a board</p> 
-<table>
-  <tr>
-    <td *ngFor="let columns of kanbanBoard, let i = index">
-      <table>
-        <thead>
-          <tr>
-            {{columns[0]}}
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let card of columns[i] | slice:1">
-            <!-- card component-->
-          </tr>
-        </tbody>
-      </table>
-    </td>
-  </tr>
-</table>
+
+<!--{{kanbanBoard.Columns[0][0].toString()}}-->
+
+<ul>
+  <li *ngFor="let column of kanbanBoard.Columns"> {{column[0].toString()}} </li>
+</ul>
+
+
+<div class="row">
+  <div class="column">
+    <app-card [card]=kanbanBoard.Columns[0][0]></app-card>
+  </div>
+  <div class="column">
+      <app-card [card]=kanbanBoard.Columns[1][0]></app-card>
+    </div>
+</div>
+
 
