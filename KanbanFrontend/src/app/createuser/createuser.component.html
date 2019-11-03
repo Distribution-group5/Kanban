@@ -1,0 +1,8 @@
+<p>createuser works!</p>
+<form #createuser ="ngForm" (ngSubmit) = "onClickSubmit(createuser.value)" >
+<input type="text" name = "username" placeholder="username" ngModel>
+<input type="password" name = "password" placeholder="password" ngModel>
+<input type="password" name = "passwordConfirm" placeholder="passwordAgain" ngModel>
+<input type = "submit" value = "CreateUser">
+<p>{{ status }}</p>
+    </form>
