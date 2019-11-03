@@ -6,15 +6,17 @@ import { BoardComponent } from './board/board.component';
 import { LoginComponent } from './login/login.component';
 import { TestsiteComponent } from './testsite/testsite.component';
 import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io';
-
+import { CardComponent } from './card/card.component';
 const config: SocketIoConfig = { url: 'http://localhost:4444', options: {} };
+
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
     LoginComponent,
-    TestsiteComponent
+    TestsiteComponent,
+    CardComponent
   ],
   imports: [
     BrowserModule,

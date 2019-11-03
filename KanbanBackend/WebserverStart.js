@@ -1,13 +1,14 @@
 const webSocket = require('./Board/BoardWebSocket.js');
-var express = require('Express');
-var app = express();
-var boardController = require('./Board/BoardController.js');
-var userController = require('./User/UserController.js');
+const express = require('Express');
+const app = express();
+const boardController = require('./Board/BoardController.js');
+const userController = require('./User/UserController.js');
 
 console.log("It is starting O.o");
 
 webSocket.startWebsocket();
 
+app.use(express.json());
 app.use('/Board', boardController);
 app.use('/User', userController);
 
