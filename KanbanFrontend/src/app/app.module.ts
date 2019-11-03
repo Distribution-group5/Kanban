@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { BoardComponent } from './board/board.component';
 import { LoginComponent } from './login/login.component';
 import { BoardViewComponent } from './board-view/board-view.component';
+import { CardComponent } from './card/card.component';
 
 @NgModule({
   declarations: [
@@ -13,6 +14,7 @@ import { BoardViewComponent } from './board-view/board-view.component';
     BoardComponent,
     LoginComponent,
     BoardViewComponent
+    CardComponent
   ],
   imports: [
     BrowserModule,
