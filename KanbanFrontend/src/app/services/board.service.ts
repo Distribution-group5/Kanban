@@ -14,7 +14,7 @@ export class BoardService {
   getKanbanBoard(id: string) {
     this.socket.emit('getKanbanBoard', id);
   }
-  
+
   editKanbanBoard(board: Board) {
     this.socket.emit('editKanbanBoard', board);
   }

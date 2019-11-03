@@ -1,4 +1,6 @@
 export class Board {
-    id: string;
+    id: number;
     kanBoard: string;
+    columns: Array<Array<JSON>>;
 }
+    
