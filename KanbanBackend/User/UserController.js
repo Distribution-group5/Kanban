@@ -20,10 +20,13 @@ userRouter.put('/CreateUser', function (req, res, next) {
         let sql = `INSERT INTO Users VALUES ('${username}', '${password}');`;
         console.log("Connected!");
         con.query(sql, function (err, result) {
-            if (err) next(err)
+            if (err){
+                console.log('USER ALREADY EXISTS')
+            }
             else {
                 console.log(`User created: ${username}`);
-                res.status(200).send(`User created`);
+                //I have changed the method under to send a json object back
+                res.send({ username: `${username}` })
             }
         });
     });

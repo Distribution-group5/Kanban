@@ -6,12 +6,14 @@ import { AppComponent } from './app.component';
 import { CookieService } from 'ngx-cookie-service';
 import { BoardComponent } from './board/board.component';
 import { LoginComponent } from './login/login.component';
+import { CreateuserComponent } from './createuser/createuser.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     BoardComponent,
     LoginComponent,
+    CreateuserComponent,
   ],
   imports: [
     BrowserModule,
