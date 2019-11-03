@@ -42,8 +42,14 @@ export class KanbanBoard {
     return MaxRows;
   }
 
-  moveCard(theCard:KanbanCard/* , column:number, row:number */){
-    // this.Columns[0].splice(0,1);
+  moveCard(theCard:KanbanCard){
+    for (let column in this.Columns){
+      for(let card in this.Columns[column]){
+        if(this.Columns[column][card] === theCard){
+          this.Columns[column].splice(Number(card),1);
+        }
+      }
+    }
     
     console.log(theCard);
   }
