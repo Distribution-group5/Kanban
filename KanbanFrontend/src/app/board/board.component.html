@@ -2,18 +2,13 @@
 
 <!--{{kanbanBoard.Columns[0][0].toString()}}-->
 
-<ul>
+<!-- <ul>
   <li *ngFor="let column of kanbanBoard.Columns"> {{column[0].toString()}} </li>
-</ul>
-
+</ul> -->
 
 <div class="row">
-  <div class="column">
-    <app-card [card]=kanbanBoard.Columns[0][0]></app-card>
+  <div class="column" *ngFor="let column of kanbanBoard.Columns">
+    <!-- <h3>Column title</h3> -->
+    <app-card *ngFor="let card of column" [card]=card (click)="kanbanBoard.moveCard(card)"></app-card>
   </div>
-  <div class="column">
-      <app-card [card]=kanbanBoard.Columns[1][0]></app-card>
-    </div>
 </div>
-
-

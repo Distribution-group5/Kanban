@@ -18,4 +18,7 @@ KanbanBackend/.vs/KanbanBackend/v15/.suo
 /KanbanBackend/node_modules
 DBInfo.txt
 KanbanBackend/DBInfo.txt
+.vs/slnx.sqlite
+.vs/Kanban/v16/.suo
+.vs/Kanban/config/applicationhost.config
 /.vs

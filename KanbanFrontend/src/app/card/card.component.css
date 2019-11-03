@@ -1,0 +1,35 @@
+div{
+    width: 100%;
+    background-color: tan;
+}
+
+textarea {
+  width: 90%;
+  border: 0px;
+  padding-left: 10px;
+  resize: none;
+  background-color: tan;
+  outline: none;
+  font-family: Verdana;
+  font-size: 12px;
+}
+
+h5 {
+  width: 90%;
+  padding-left: 10px;
+}
+
+#CardHeader{
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+}
+
+#Date {
+  font-family: Verdana;
+  font-size: 12px;
+  white-space: pre-wrap;
+  width: 90%;
+  padding-left: 10px;
+  padding-bottom: 20px;
+}
