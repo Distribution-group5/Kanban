@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, NgModule, Output, EventEmitter } from '@angular/core';
+import { FormsModule } from '@angular/forms'; 
 import { KanbanCard } from '../board/board.component';
 
 @Component({
@@ -6,6 +7,10 @@ import { KanbanCard } from '../board/board.component';
     templateUrl: './card.component.html',
     styleUrls: ['./card.component.css']
 })
+@NgModule({
+    imports: [
+    FormsModule]
+    })
 
 export class CardComponent implements OnInit {
 
@@ -13,7 +18,7 @@ export class CardComponent implements OnInit {
     @Output() cardUpdate = new EventEmitter<KanbanCard>();
 
     raiseCardUpdate() {
-        console.log("Changed occured");
+        console.log(this.card);
         this.cardUpdate.emit(this.card);
     }
 
