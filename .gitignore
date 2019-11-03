@@ -1,4 +1,3 @@
-
 KanbanBackend/.vs/VSWorkspaceState.json
 KanbanBackend/.vs/slnx.sqlite
 KanbanBackend/.vs/ProjectSettings.json
@@ -14,10 +13,12 @@ KanbanBackend/.vs/KanbanBackend/v15/.suo
 .vs/Kanban/v16/.suo
 /node_modules
 /package-lock.json
+.vs/slnx.sqlite
+/KanbanBackend/DBInfo.txt
+/KanbanBackend/node_modules
 DBInfo.txt
 KanbanBackend/DBInfo.txt
-KanbanFrontend/package.json
-KanbanFrontend/package-lock.json
 .vs/slnx.sqlite
 .vs/Kanban/v16/.suo
 .vs/Kanban/config/applicationhost.config
+/.vs

@@ -1,1 +1,8 @@
 <p>login works!</p>
+
+<form #login ="ngForm" (ngSubmit) = "onClickSubmit(login.value)" >
+<input type="text" name = "username" placeholder="username" ngModel>
+<input type="password" name = "password" placeholder="password" ngModel>
+<input type = "submit" value = "submit">
+<p>{{ status }}</p>
+</form>
