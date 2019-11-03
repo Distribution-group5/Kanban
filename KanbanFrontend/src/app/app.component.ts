@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 
 
 @Component({
@@ -9,7 +9,7 @@ import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 export class AppComponent implements OnInit {
   title = 'KanbanFrontend';
 
-  constructor(changeRef: ChangeDetectorRef) { }
+  constructor() { }
 
   ngOnInit() { }
 }

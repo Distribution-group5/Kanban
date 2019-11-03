@@ -41,6 +41,8 @@ let startWebsocket = function () {
             }
         });
 
+      
+
         ws.on('close', (code, msg) => {
             console.log("Connection closing:", code, msg);
         });
@@ -49,7 +51,7 @@ let startWebsocket = function () {
             console.log(`An error occured. ${ws._socket.remoteAddress} caused the following error: ${event.message}`);
         }
     });
-}
+}  
 
 module.exports = {startWebsocket}
 
