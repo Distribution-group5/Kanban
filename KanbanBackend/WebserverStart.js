@@ -13,4 +13,4 @@ app.use(express.json());
 app.use('/Board', boardController);
 app.use('/User', userController);
 
-app.listen(4040);
+app.listen(8080);

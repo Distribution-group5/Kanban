@@ -1,4 +1,3 @@
-<textarea  placeholder='Start typing...'></textarea>
 
 <p>This is a board</p> 
 
@@ -8,7 +7,7 @@
   <li *ngFor="let column of kanbanBoard.Columns"> {{column[0].toString()}} </li>
 </ul>
 
-<input type="text">
+
 
 <div class="row">
   <div class="column">
@@ -19,4 +18,9 @@
     </div>
 </div>
 
+<p>Write something here:</p>
+<input type="text" id="textfield1" value="test"><br>
+<br>
+<button (click)="myFunction()" type="button">Update</button><br>
 
+<p id="demo">this should be updated</p>
