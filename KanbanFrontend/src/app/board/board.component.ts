@@ -48,16 +48,62 @@ export class KanbanBoard {
     return amount;
   }
 
-  moveCard(theCard:KanbanCard){
+  moveCard(theCard:KanbanCard, direction:String){
+    let pushed = false;
     for (let column in this.Columns){
       for(let card in this.Columns[column]){
         if(this.Columns[column][card] === theCard){
-          //this.Columns[column].splice(Number(card),1);
+          if(pushed === false){
+            switch(direction){
+              case 'right':
+                this.Columns[column].splice(Number(card),1);
+                if(Number(column) < this.Columns.length-1){
+                  this.Columns[Number(column)+1].splice(Number(card), 0, theCard);
+                }else{
+                  this.Columns.push([]);
+                  this.Columns[Number(column)+1].push(theCard);
+                }
+                pushed = true;
+                break;
+              case 'left':
+                  if(Number(column) > 0){
+                    this.Columns[column].splice(Number(card),1);
+                    this.Columns[Number(column)-1].splice(Number(card), 0, theCard);
+                    pushed = true;
+                  }
+                break;
+              case 'up':
+                  if(Number(card) > 0){
+                    this.Columns[column].splice(Number(card),1);
+                    this.Columns[Number(column)].splice(Number(card)-1, 0, theCard);
+                    pushed = true;
+                  }
+                break;
+              case 'down':
+                  if(Number(card) < this.Columns[column].length-1){
+                    this.Columns[column].splice(Number(card),1);
+                    this.Columns[Number(column)].splice(Number(card)+1, 0, theCard);
+                    pushed = true;
+                  }
+                break;
+              default:
+                console.log("error in switch");
+            }
+          }
         }
       }
     }
-    
-    console.log(theCard);
+    //console.log(theCard);
+  }
+
+  deleteCard(theCard:KanbanCard){
+    for (let column in this.Columns){
+      for(let card in this.Columns[column]){
+        if(this.Columns[column][card] === theCard){
+          this.Columns[column].splice(Number(card),1);
+        }
+      }
+    }
   }
 
   createCard(column:number){

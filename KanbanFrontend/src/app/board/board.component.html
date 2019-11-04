@@ -9,7 +9,15 @@
 <div class="row">
   <div class="column" *ngFor="let column of kanbanBoard.Columns">
     <!-- <h3>Column title</h3> -->
-    <app-card *ngFor="let card of column" [card]=card (click)="kanbanBoard.moveCard(card)"></app-card>
+    <div *ngFor="let card of column">
+      <app-card [card]=card ></app-card>
+      <button (click)="kanbanBoard.moveCard(card,'left')">left</button>
+      <button (click)="kanbanBoard.moveCard(card, 'right')">right</button>
+      <button (click)="kanbanBoard.moveCard(card, 'up')">up</button>
+      <button (click)="kanbanBoard.moveCard(card, 'down')">down</button>
+      <button (click)="kanbanBoard.deleteCard(card)">delete</button>
+    </div>
+    
     <p align="center">
       <button (click)="kanbanBoard.createCard(kanbanBoard.Columns.indexOf(column))">Create card</button>
     </p>
