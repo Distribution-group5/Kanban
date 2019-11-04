@@ -11,17 +11,17 @@
     <!-- <h3>Column title</h3> -->
     <div *ngFor="let card of column">
       <app-card [card]=card ></app-card>
-      <button id="b20" (click)="kanbanBoard.moveCard(card,'left')">left</button>
-      <button id="b20" (click)="kanbanBoard.moveCard(card, 'right')">right</button>
-      <button id="b20" (click)="kanbanBoard.moveCard(card, 'up')">up</button>
-      <button id="b20" (click)="kanbanBoard.moveCard(card, 'down')">down</button>
-      <button id="b20" (click)="kanbanBoard.deleteCard(card)">delete</button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card,'left')"><img src="assets/left.png" id="i20"></button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card, 'right')"><img src="assets/right.png" id="i20"></button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card, 'up')"><img src="assets/up.png" id="i20"></button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card, 'down')"><img src="assets/down.png" id="i20"></button>
+      <button id="b20" (click)="kanbanBoard.deleteCard(card)"><img src="assets/deleteRed.png" id="i20"></button>
     </div>
     
     <p align="center">
-      <button (click)="kanbanBoard.createCard(kanbanBoard.Columns.indexOf(column))">Create card</button>
+      <button (click)="kanbanBoard.createCard(kanbanBoard.Columns.indexOf(column))"><img src="assets/create2.png" style="width:30px"><div><b>Create card</b></div></button>
     </p>
     
   </div>
-    <button (click)="kanbanBoard.createCard(kanbanBoard.Columns.length)">Create card</button>
+    <button (click)="kanbanBoard.createCard(kanbanBoard.Columns.length)"><img src="assets/create2.png" style="width:30px"><div><b>Create card</b></div></button>
 </div>
