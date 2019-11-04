@@ -1,4 +1,5 @@
 import { Component, OnInit} from '@angular/core';
+import { send } from 'q';
 
 @Component({
   selector: 'app-board',
@@ -33,26 +34,57 @@ export class BoardComponent implements OnInit {
   }
 
   saveCard(theCard:KanbanCard){
-    console.log("hello0")
     //this.kanbanBoard.getKanbancard(theCard);
     for(let column in this.kanbanBoard.Columns){
       for(let card in this.kanbanBoard.Columns[column]){
         if(this.kanbanBoard.Columns[column][card].id === theCard.id){
-          console.log("yay")
+          console.log("yay");
           console.log(this.kanbanBoard.Columns[column][card].id);
           this.kanbanBoard.Columns[column][card] = theCard;
-          console.log("Yay??")
+          console.log("now we send");
+          this.updateCard(theCard);
+
         }
       }
     }
-    console.log("hello2")
   }
+
   myFunction(){
     let testy = (<HTMLInputElement>document.getElementById("textfield1")).value;
     console.log(testy);
     document.getElementById("demo").innerHTML = testy;
     
   }
+
+  async updateCard(formData){
+    try{
+      formData = JSON.stringify(formData);
+      const data = await postData('http://localhost:4200/user/kanbanboard', formData);
+    }
+    catch(error){
+      console.error(error)
+    }
+    async function postData(url = '', data = ''){
+      console.log("Data to be send is" + data + url)
+      const response = await fetch(url,{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: data
+      });
+      try{
+        //We turn the response into an json object
+      return await response.json();
+      }
+      catch(error){
+        //We return undefined if the server didn't find a match with user+pass
+        return undefined
+      }
+    }
+  }
+
+
 }    
 
 
