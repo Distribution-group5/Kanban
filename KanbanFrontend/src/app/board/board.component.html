@@ -11,11 +11,11 @@
     <!-- <h3>Column title</h3> -->
     <div *ngFor="let card of column">
       <app-card [card]=card ></app-card>
-      <button (click)="kanbanBoard.moveCard(card,'left')">left</button>
-      <button (click)="kanbanBoard.moveCard(card, 'right')">right</button>
-      <button (click)="kanbanBoard.moveCard(card, 'up')">up</button>
-      <button (click)="kanbanBoard.moveCard(card, 'down')">down</button>
-      <button (click)="kanbanBoard.deleteCard(card)">delete</button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card,'left')">left</button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card, 'right')">right</button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card, 'up')">up</button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card, 'down')">down</button>
+      <button id="b20" (click)="kanbanBoard.deleteCard(card)">delete</button>
     </div>
     
     <p align="center">
