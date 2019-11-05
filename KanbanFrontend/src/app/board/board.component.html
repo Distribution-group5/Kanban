@@ -3,7 +3,7 @@
     <!-- <h3>Column title</h3> -->
     <div *ngFor="let card of column">
       <app-card [card]=card ></app-card>
-      <button id="b20" (click)="kanbanBoard.moveCard(card,'left')"><img src="assets/left.png" id="i20"></button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card, 'left')"><img src="assets/left.png" id="i20"></button>
       <button id="b20" (click)="kanbanBoard.moveCard(card, 'right')"><img src="assets/right.png" id="i20"></button>
       <button id="b20" (click)="kanbanBoard.moveCard(card, 'up')"><img src="assets/up.png" id="i20"></button>
       <button id="b20" (click)="kanbanBoard.moveCard(card, 'down')"><img src="assets/down.png" id="i20"></button>

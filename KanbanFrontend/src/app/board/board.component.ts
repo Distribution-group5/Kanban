@@ -8,7 +8,7 @@ import { send } from 'q';
 })
 export class BoardComponent implements OnInit {
   WebSocket1: WebSocket
-  kanbanBoard = new KanbanBoard(1, "Example", [ ]);
+  kanbanBoard = new KanbanBoard();
 
   constructor() {
 
@@ -20,7 +20,10 @@ export class BoardComponent implements OnInit {
     console.log("Hello is this still undefined");
     let data1 = JSON.parse(data);
     console.log(data1);
-    this.kanbanBoard = data1;
+    this.kanbanBoard = Object.assign(new KanbanBoard(), data);
+    
+    console.log(this.kanbanBoard);
+    //this.kanbanBoard = data1;
   }
    
   ngOnInit() {
@@ -41,8 +44,8 @@ export class BoardComponent implements OnInit {
     } 
   boardChanged(){
     let kanbanBoard = JSON.stringify(this.kanbanBoard);
-    let datatosend = JSON.stringify({messageType: "hello", newBoardState: kanbanBoard})
-      this.WebSocket1.send(datatosend);
+    let datatosend = JSON.stringify({messageType: "hello", newBoardState: kanbanBoard});
+    this.WebSocket1.send(datatosend);
     }
    
     
@@ -50,16 +53,13 @@ export class BoardComponent implements OnInit {
   }   
 
 
-export class KanbanBoard {
+ export class KanbanBoard {
   id: number;
   Title: string;
   Columns: Array<Array<KanbanCard>>;
 
-  constructor(id, Title, Columns) {
-    this.id = id;
-    this.Title = Title;
-    this.Columns = Columns;
-  }
+  constructor(){}
+
 
   get NumberOfColumns() {
     return this.Columns.length;
