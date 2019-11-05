@@ -31,7 +31,7 @@ let startWebsocket = function () {
                     currentBoardState.readJson(newBoardState);
                     connectedClients.forEach(x => {
                         if (x.Board === newBoardState.id) {
-                            x.ws.send(JSON.stringify(newBoardState));
+                            x.WebSocket.send(JSON.stringify(newBoardState));
                         }
                     });
                 }
