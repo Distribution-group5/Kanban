@@ -11,15 +11,13 @@ export class BoardComponent implements OnInit {
   kanbanBoard = new KanbanBoard();
 
   constructor() {
-
-    
-   }
+  }
   
    methodInvoked(data){
-    console.log("CALLBACK VIRKER" + data);
+    //console.log("CALLBACK VIRKER" + data);
     let data1 = JSON.parse(data);
     this.kanbanBoard = Object.assign(new KanbanBoard(), data1);
-    console.log(this.kanbanBoard);
+    //console.log(this.kanbanBoard);
     //this.kanbanBoard = data1;
   }
    
@@ -29,24 +27,26 @@ export class BoardComponent implements OnInit {
     
     
     this.WebSocket1.onmessage = event =>{
-      console.log(event.data);
+      //console.log(event.data);
       this.methodInvoked(event.data)
-      
-    
-      console.log("hej");};
+      //console.log("hej");
+      };
     this.WebSocket1.onopen = () => this.WebSocket1.send(datatosend);
+  }
 
-    
-  
-    } 
   boardChanged(){
     let kanbanBoard = JSON.stringify(this.kanbanBoard);
     let datatosend = JSON.stringify({messageType: "hello", newBoardState: kanbanBoard});
     this.WebSocket1.send(datatosend);
     }
-   
-    
 
+    timeout = null;
+    delayedboardChanged(){
+      clearTimeout(this.timeout);
+      this.timeout = setTimeout(() => {
+        this.boardChanged();
+      }, 1000);
+    }
   }   
 
 

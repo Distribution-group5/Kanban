@@ -2,7 +2,7 @@
   <div class="column" *ngFor="let column of kanbanBoard.Columns">
     <!-- <h3>Column title</h3> -->
     <div *ngFor="let card of column">
-      <app-card [card]=card ></app-card>
+      <app-card [card]=card (keyup)="delayedboardChanged()"></app-card>
       <button id="b20" (click)="kanbanBoard.moveCard(card, 'left'); boardChanged()"><img src="assets/left.png" id="i20"></button>
       <button id="b20" (click)="kanbanBoard.moveCard(card, 'right'); boardChanged()"><img src="assets/right.png" id="i20"></button>
       <button id="b20" (click)="kanbanBoard.moveCard(card, 'up'); boardChanged()"><img src="assets/up.png" id="i20"></button>

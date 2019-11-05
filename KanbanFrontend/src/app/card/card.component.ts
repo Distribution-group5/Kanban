@@ -16,10 +16,7 @@ export class CardComponent implements OnInit {
 
     @Input() card: KanbanCard;
     @Output() cardUpdate = new EventEmitter<KanbanCard>();
-    boardComponent = new BoardComponent();
     raiseCardUpdate() {
-        this.boardComponent.boardChanged
-        //console.log(this.card);
         this.cardUpdate.emit(this.card);
     }
 
