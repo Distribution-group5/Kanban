@@ -34,10 +34,6 @@ export class CardComponent implements OnInit {
     ngOnInit() {
     }
 
-    savecard(){
-        this.boardComponent.saveCard(this.card);
-        
-        
-    }
+   
 }
 

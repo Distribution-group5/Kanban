@@ -7,7 +7,7 @@ import { send } from 'q';
   styleUrls: ['./board.component.css']
 })
 export class BoardComponent implements OnInit {
-
+  WebSocket1: WebSocket
   kanbanBoard = new KanbanBoard(1, "Example", [
     [new KanbanCard(1, "Card1 title", "This is the content1", ["Bob", "Berta"], new Date(Date.now()), new Date(Date.now())), new KanbanCard(3, "Card3 title", "This is the content3", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now())), new KanbanCard(6, "Card6 title", "This is the content6", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now())),new KanbanCard(7, "Card7 title", "This is the content7", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now()))], 
     [new KanbanCard(2, "Card2 title", "content2", ["Niels", "Hans"], new Date(Date.now()), new Date(Date.now())),new KanbanCard(9, "Card9 title", "This is the content9", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now())), new KanbanCard(10, "Card10 title", "This is the content10", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now()))],
@@ -19,64 +19,33 @@ export class BoardComponent implements OnInit {
 
     
    }
+  
 
+   
   ngOnInit() {
+    this.WebSocket1 = new WebSocket("ws://localhost:40/Board");
+    let datatosend = JSON.stringify({messageType: "InitialMessage", BoardID: 1});
     
-  }
-
-  saveCard(theCard:KanbanCard){
-    //this.kanbanBoard.getKanbancard(theCard);
-    for(let column in this.kanbanBoard.Columns){
-      for(let card in this.kanbanBoard.Columns[column]){
-        if(this.kanbanBoard.Columns[column][card].id === theCard.id){
-          console.log("yay");
-          console.log(this.kanbanBoard.Columns[column][card].id);
-          this.kanbanBoard.Columns[column][card] = theCard;
-          console.log("now we send");
-          this.updateCard(theCard);
-
-        }
-      }
-    }
-  }
-
-  myFunction(){
-    let testy = (<HTMLInputElement>document.getElementById("textfield1")).value;
-    console.log(testy);
-    document.getElementById("demo").innerHTML = testy;
     
-  }
-
-  async updateCard(formData){
-    try{
-      formData = JSON.stringify(formData);
-      const data = await postData('http://localhost:8080/user/kanbanboard', formData);
-    }
-    catch(error){
-      console.error(error)
-    }
-    async function postData(url = '', data = ''){
-      console.log("Data to be send is" + data + url)
-      const response = await fetch(url,{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: data
-      });
-      try{
-        //We turn the response into an json object
-      return await response.json();
-      }
-      catch(error){
-        //We return undefined if the server didn't find a match with user+pass
-        return undefined
-      }
-    }
-  }
+    this.WebSocket1.onmessage = function(event){
+      console.log(event.data);
+       console.log("hej");
+      console.log();};
+    this.WebSocket1.onopen = () => this.WebSocket1.send(datatosend);
+    //this.WebSocket1.send(datatosend);
+    //this.WebSocket1.onmessage = function (event) {
+      //console.log(event.data);
+    //}
 
 
-}    
+    //ws.onmessage = event => {
+    //console.log(event.data); //Update KanbanBoard variable after destringifying
+} 
+  
+   // ws.send(data.toString()); //WHen a change occurs notify server
+    
+
+  }   
 
 
 export class KanbanBoard {
