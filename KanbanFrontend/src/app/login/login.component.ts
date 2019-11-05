@@ -20,7 +20,8 @@ export class LoginComponent implements OnInit {
       //data is the response from the server
       const data = await postData('http://localhost:8080/user/login/',formData);
       //If data is not undefined, which means the user + password combo did exist
-      if(data != undefined){
+        console.log(data);
+        if (data != undefined) {
       //Set cookie with the username returned from the node server.
       this.cookie.set('data',data.username)
       //We display some HTML to show the user it worked
