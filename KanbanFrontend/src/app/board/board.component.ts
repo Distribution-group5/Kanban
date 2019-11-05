@@ -20,18 +20,23 @@ export class BoardComponent implements OnInit {
     
    }
   
-
+   methodInvoked(data){
+    console.log("CALLBACK VIRKER" + data)
+  }
    
   ngOnInit() {
     this.WebSocket1 = new WebSocket("ws://localhost:40/Board");
     let datatosend = JSON.stringify({messageType: "InitialMessage", BoardID: 1});
     
     
-    this.WebSocket1.onmessage = function(event){
+    this.WebSocket1.onmessage = event =>{
       console.log(event.data);
-       console.log("hej");
+      this.methodInvoked(event.data)
+      
+    
       console.log();};
     this.WebSocket1.onopen = () => this.WebSocket1.send(datatosend);
+
     //this.WebSocket1.send(datatosend);
     //this.WebSocket1.onmessage = function (event) {
       //console.log(event.data);

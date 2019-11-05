@@ -6,11 +6,11 @@ let startWebsocket = function () {
     let wsserver = new Server({ port: 40, path: '/Board' });
 
     let boards = [
-        new KanbanBoard(1, "Example", [
-            [new KanbanCard(1, "Card1 title", "This is the content1", ["Bob", "Berta"], new Date(Date.now()), new Date(Date.now())), new KanbanCard(3, "Card3 title", "This is the content3", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now())), new KanbanCard(6, "Card6 title", "This is the content6", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now())),new KanbanCard(7, "Card7 title", "This is the content7", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now()))], 
-            [new KanbanCard(2, "Card2 title", "content2", ["Niels", "Hans"], new Date(Date.now()), new Date(Date.now())),new KanbanCard(9, "Card9 title", "This is the content9", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now())), new KanbanCard(10, "Card10 title", "This is the content10", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now()))],
-            [new KanbanCard(4, "Card4 title", "content4", ["John"], new Date(Date.now()), new Date(Date.now()))],
-            [new KanbanCard(5, "Card5 title", "content5", ["Johnny"], new Date(Date.now()), new Date(Date.now())), new KanbanCard(11, "Card11 title", "This is the content11", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now()))]
+        new Kanban.Board(1, "Example", [
+            [new Kanban.Card(1, "Card1 title", "This is the content1", ["Bob", "Berta"], new Date(Date.now()), new Date(Date.now())), new Kanban.Card(3, "Card3 title", "This is the content3", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now())), new Kanban.Card(6, "Card6 title", "This is the content6", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now())),new Kanban.Card(7, "Card7 title", "This is the content7", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now()))], 
+            [new Kanban.Card(2, "Card2 title", "content2", ["Niels", "Hans"], new Date(Date.now()), new Date(Date.now())),new Kanban.Card(9, "Card9 title", "This is the content9", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now())), new Kanban.Card(10, "Card10 title", "This is the content10", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now()))],
+            [new Kanban.Card(4, "Card4 title", "content4", ["John"], new Date(Date.now()), new Date(Date.now()))],
+            [new Kanban.Card(5, "Card5 title", "content5", ["Johnny"], new Date(Date.now()), new Date(Date.now())), new Kanban.Card(11, "Card11 title", "This is the content11", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now()))]
           ])
     ];
     let connectedClients = [];
