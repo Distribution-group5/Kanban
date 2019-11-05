@@ -13,7 +13,7 @@ import { CardComponent } from './card/card.component';
     AppComponent,
     BoardComponent,
     LoginComponent,
-    BoardViewComponent
+    BoardViewComponent,
     CardComponent
   ],
   imports: [
