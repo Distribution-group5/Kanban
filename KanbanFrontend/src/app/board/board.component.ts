@@ -17,11 +17,8 @@ export class BoardComponent implements OnInit {
   
    methodInvoked(data){
     console.log("CALLBACK VIRKER" + data);
-    console.log("Hello is this still undefined");
     let data1 = JSON.parse(data);
-    console.log(data1);
-    this.kanbanBoard = Object.assign(new KanbanBoard(), data);
-    
+    this.kanbanBoard = Object.assign(new KanbanBoard(), data1);
     console.log(this.kanbanBoard);
     //this.kanbanBoard = data1;
   }

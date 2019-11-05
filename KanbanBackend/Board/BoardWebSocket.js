@@ -1,3 +1,4 @@
+let connectedClients = [];
 
 let startWebsocket = function () {
     const { Server } = require('ws');
@@ -13,7 +14,7 @@ let startWebsocket = function () {
             [new Kanban.Card(5, "Card5 title", "content5", ["Johnny"], new Date(Date.now()), new Date(Date.now())), new Kanban.Card(11, "Card11 title", "This is the content11", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now()))]
           ])
     ];
-    let connectedClients = [];
+  
 
     wsserver.on('connection', ws => {
         console.log('New client connected');
