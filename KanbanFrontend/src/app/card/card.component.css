@@ -1,6 +1,6 @@
 div{
-    width: 100%;
-    background-color: tan;
+  width: 100%;
+  background-color: tan;
 }
 
 textarea {
@@ -17,6 +17,7 @@ textarea {
 h5 {
   width: 90%;
   padding-left: 10px;
+  margin: 0;
 }
 
 #CardHeader{
