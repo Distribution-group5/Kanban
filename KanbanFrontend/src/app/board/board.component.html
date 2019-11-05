@@ -1,26 +1,19 @@
-
-<p>This is a board</p> 
-
-<!--{{kanbanBoard.Columns[0][0].toString()}}-->
-
-<!-- <ul>
-  <li *ngFor="let column of kanbanBoard.Columns"> {{column[0].toString()}} </li>
-</ul> -->
-
-
 <div class="row">
   <div class="column" *ngFor="let column of kanbanBoard.Columns">
     <!-- <h3>Column title</h3> -->
+    <div *ngFor="let card of column">
+      <app-card [card]=card ></app-card>
+      <button id="b20" (click)="kanbanBoard.moveCard(card,'left')"><img src="assets/left.png" id="i20"></button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card, 'right')"><img src="assets/right.png" id="i20"></button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card, 'up')"><img src="assets/up.png" id="i20"></button>
+      <button id="b20" (click)="kanbanBoard.moveCard(card, 'down')"><img src="assets/down.png" id="i20"></button>
+      <button id="b20" (click)="kanbanBoard.deleteCard(card)"><img src="assets/deleteRed.png" id="i20"></button>
+    </div>
     
-    <app-card *ngFor="let card of column" [card]=card (click)="kanbanBoard.moveCard(card)"></app-card>
-    <p>WHERE IS THIS</p>
+    <p align="center">
+      <button (click)="kanbanBoard.createCard(kanbanBoard.Columns.indexOf(column))"><img src="assets/create2.png" style="width:30px"><div><b>Create card</b></div></button>
+    </p>
+    
   </div>
-  
+    <button (click)="kanbanBoard.createCard(kanbanBoard.Columns.length)"><img src="assets/create2.png" style="width:30px"><div><b>Create card</b></div></button>
 </div>
-<button (click)="saveCard(card)">Save Changes</button>
-<p>Write something here:</p>
-<input type="text" id="textfield1" value="test"><br>
-<br>
-<button (click)="myFunction($event)" type="button">Update</button><br>
-
-<p id="demo">this should be updated</p>
