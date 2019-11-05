@@ -24,6 +24,7 @@ let startWebsocket = function () {
                     connectedClients.push({ Board: parsedMsg.BoardID, WebSocket: ws });
                     ws.send(JSON.stringify(boards.find(x => x.id === parsedMsg.BoardID)));
                 } else {
+                    console.log("Ive recieved the new board")
                     const newBoardState = JSON.parse(parsedMsg.newBoardState);
                     let currentBoardState = boards.find(x => x.id === newBoardState.id);
                     currentBoardState.readJson(newBoardState);
