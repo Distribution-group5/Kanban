@@ -59,7 +59,7 @@ export class BoardComponent implements OnInit {
   async updateCard(formData){
     try{
       formData = JSON.stringify(formData);
-      const data = await postData('http://localhost:4200/user/kanbanboard', formData);
+      const data = await postData('http://localhost:8080/user/kanbanboard', formData);
     }
     catch(error){
       console.error(error)
