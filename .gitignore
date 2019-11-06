@@ -23,3 +23,4 @@ KanbanBackend/DBInfo.txt
 .vs/Kanban/v16/.suo
 .vs/Kanban/config/applicationhost.config
 /.vs
+KanbanBackend/node_modules/
