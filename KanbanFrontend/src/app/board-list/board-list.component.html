@@ -1,4 +1,13 @@
 
 <ul>
-  <li *ngFor="let board of BoardList">Board ID: {{board.BoardID}} Title: {{board.Title}} <a href="http://localhost:4200/kanbanboard/{{board.BoardID}}">Open</a></li>
+  <li *ngFor="let board of BoardList">
+    Board ID: {{board.BoardID}} Title: {{board.Title}} <a href="http://localhost:4200/kanbanboard/{{board.BoardID}}">Open</a>
+    <button (click)="DeleteBoard(board.BoardID)">Delete</button>
+  </li>
+  <li>
+    <form #newBoard="ngForm" (ngSubmit)="CreateBoard(newBoard.value)">
+      <input type="text" name="title" placeholder="Title" ngModel>
+      <input type="submit" value="submit">
+    </form>
+  </li>
 </ul>
