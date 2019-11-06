@@ -22,7 +22,6 @@ export class BoardComponent implements OnInit {
     let boardid123 = this.route.snapshot.paramMap.get("BoardID");
     let boardid1234 = +boardid123;
     this.WebSocket1 = new WebSocket("ws://localhost:40/Board");
-    console.log("is a:  "+boardid1234.valueOf);
     let datatosend = JSON.stringify({messageType: "InitialMessage", BoardID: boardid1234});
 
     
