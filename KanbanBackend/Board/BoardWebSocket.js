@@ -32,17 +32,51 @@ let startWebsocket = function () {
                     console.log("before getBoard");
                     let targetBoardID = parsedMsg.BoardID;
                     let foundBoard = boards.find(x => x.id === targetBoardID);
+                    connectedClients.push({ Board: targetBoardID, WebSocket: ws });
                     console.log("foundBoard: " + foundBoard);
                     if (foundBoard === undefined) {
-                        boards.push(getBoard(targetBoardID));
+                        console.log("getBoard called");
+                        let con = mysql.createConnection({
+                            host: dbInfoArray[0],
+                            user: dbInfoArray[1],
+                            password: dbInfoArray[2],
+                            database: 'KanbanDatabase'
+                        });
+
+                        con.connect(function (err) {
+                            if (err) next(err);
+                            let sql = `SELECT BoardObject FROM Board WHERE BoardID = ${targetBoardID}`;
+                            con.query(sql, function (err, result) {
+                                if (err) {
+                                    console.log("Error getting board: ", err);
+                                }
+                                else {
+                                    console.log("Gotten board");
+                                    let b;
+                                    try {
+                                        let boardAsString;
+                                        Object.keys(result).forEach(function (key) {
+                                            var row = result[key];
+                                            boardAsString = row.BoardObject;
+                                        });
+                                        b = Object.assign(new Kanban.Board(), JSON.parse(boardAsString));
+                                    } catch (e) {
+                                        b = new Kanban.Board(targetBoardID);
+                                    }
+                                    boards.push(b);
+                                    ws.send(JSON.stringify(boards.find(x => x.id === targetBoardID)));
+                                }
+                            });
+                        });
+                    } else {
+                        let resultString = JSON.stringify(foundBoard);
+                        ws.send(resultString);
                     }
-                    connectedClients.push({ Board: targetBoardID, WebSocket: ws });
-                    ws.send(JSON.stringify(boards.find(x => x.id === targetBoardID)));
                 } else {
                     console.log("Ive recieved the new board")
                     const newBoardState = JSON.parse(parsedMsg.newBoardState);
                     let currentBoardState = boards.find(x => x.id === newBoardState.id);
-                    currentBoardState.readJson(newBoardState);
+                    Object.assign(currentBoardState, newBoardState);
                     connectedClients.forEach(x => {
                         if (x.Board === newBoardState.id) {
                             x.WebSocket.send(JSON.stringify(newBoardState));
@@ -68,6 +102,7 @@ let startWebsocket = function () {
 }
 
 function saveBoard(board) {
+    console.log(board);
     let boardAsJSON = JSON.stringify(board);
     let con = mysql.createConnection({
         host: dbInfoArray[0],
@@ -76,43 +111,22 @@ function saveBoard(board) {
         database: 'KanbanDatabase'
     });
 
-    con.connect(function (err) {
-        if (err) next(err);
-        let sql = `INSERT INTO Board VALUES (${board.id}, '${board.Title}', '${boardAsJSON}' WHERE BoardID = ${boardID}`;
-        con.query(sql, function (err, result) {
-            if (err) next(err)
-            else {
-                console.log("Board saved");
-            }
+    try {
+        con.connect(function (err) {
+            if (err) console.log(err);
+            let sql = `UPDATE Board SET BoardObject = '${boardAsJSON}' WHERE BoardID = ${board.id}`;
+            con.query(sql, function (err, result) {
+                if (err) {
+                    console.log('Could not save. We should probably do something about this. Oh well... ¯\_(**)_/¯', err);
+                }
+                else {
+                    console.log("Board saved");
+                }
+            });
         });
-    });
-}
-
-function getBoard(boardID) {
-    console.log("getBoard called");
-    let con = mysql.createConnection({
-        host: dbInfoArray[0],
-        user: dbInfoArray[1],
-        password: dbInfoArray[2],
-        database: 'KanbanDatabase'
-    });
-
-    con.connect(function (err) {
-        if (err) next(err);
-        let sql = `SELECT BoardObject FROM Board WHERE BoardID = ${boardID}`;
-        con.query(sql, function (err, result) {
-            if (err) next(err)
-            else {
-                console.log("Gotten board");
-                try {
-                    return Object.assign(new Kanban.Board(), JSON.parse(result.BoardObject));
-                } catch (e) {
-                    return new Kanban.Board(boardID);
-                } 
-            }
-        });
-    });
-
+    } catch (e) {
+        console.log('Could not save. We should probably do something about this. Oh well... ¯\_(**)_/¯');
+    }
 }
 
 

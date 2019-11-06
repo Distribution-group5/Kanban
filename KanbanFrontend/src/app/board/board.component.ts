@@ -9,6 +9,7 @@ import { ActivatedRoute } from "@angular/router";
 export class BoardComponent implements OnInit {
   WebSocket1: WebSocket
   kanbanBoard = new KanbanBoard();
+  activeBoardId;
 
   constructor(private route: ActivatedRoute) {
   }
@@ -20,15 +21,16 @@ export class BoardComponent implements OnInit {
       this.kanbanBoard = Object.assign(new KanbanBoard(), data1);
     } catch (e) {
       this.kanbanBoard = new KanbanBoard();
+      this.kanbanBoard.id = this.activeBoardId;
     }
 
   }
 
   ngOnInit() {
     let boardid123 = this.route.snapshot.paramMap.get("BoardID");
-    let boardid1234 = +boardid123;
+    this.activeBoardId = +boardid123;
     this.WebSocket1 = new WebSocket("ws://localhost:40/Board");
-    let datatosend = JSON.stringify({ messageType: "InitialMessage", BoardID: boardid1234 });
+    let datatosend = JSON.stringify({ messageType: "InitialMessage", BoardID: this.activeBoardId });
 
 
     this.WebSocket1.onmessage = event => {
