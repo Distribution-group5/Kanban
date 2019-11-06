@@ -1,3 +1,7 @@
+const fs = require('fs');
+const mysql = require('mysql');
+let dbInfo = fs.readFileSync('./DBInfo.txt', 'utf8');
+let dbInfoArray = dbInfo.split(",");
 
 let startWebsocket = function () {
     const { Server } = require('ws');
@@ -21,6 +25,9 @@ let startWebsocket = function () {
             try {
                 const parsedMsg = JSON.parse(msg);
                 if (parsedMsg.messageType === 'InitialMessage') {
+                    console.log("before getBoard");
+                    boards.push(getBoard(parsedMsg.BoardID));
+
                     connectedClients.push({ Board: parsedMsg.BoardID, WebSocket: ws });
                     ws.send(JSON.stringify(boards.find(x => x.id === parsedMsg.BoardID)));
                 } else {
@@ -29,7 +36,7 @@ let startWebsocket = function () {
                     currentBoardState.readJson(newBoardState);
                     connectedClients.forEach(x => {
                         if (x.Board === newBoardState.id) {
-                            x.ws.send(JSON.stringify(newBoardState));
+                            x.WebSocket.send(JSON.stringify(newBoardState));
                         }
                     });
                 }
@@ -47,6 +54,30 @@ let startWebsocket = function () {
             console.log(`An error occured. ${ws._socket.remoteAddress} caused the following error: ${event.message}`);
         }
     });
+
+
+    function getBoard(boardID){
+        console.log("getBoard called");
+        let con = mysql.createConnection({
+            host: dbInfoArray[0],
+            user: dbInfoArray[1],
+            password: dbInfoArray[2],
+            database: 'KanbanDatabase'
+        });
+
+        con.connect(function (err) {
+            if (err) next(err);
+            let sql = `SELECT BoardObject FROM Board WHERE BoardID = ${boardID}`;
+            con.query(sql, function (err, result) {
+                if (err) next(err)
+                else {
+                    console.log("Gotten board");
+                    return Object.assign(new Kanban.Board() ,JSON.parse(result.BoardObject));
+                }
+            });
+        });
+
+    }
 }
 
 module.exports = {startWebsocket}
