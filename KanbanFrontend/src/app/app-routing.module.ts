@@ -7,14 +7,13 @@ import { BoardListComponent } from './board-list/board-list.component';
 
 
 const routes: Routes = [
-    { path: 'kanbanboard', component: BoardComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'createuser', component: CreateuserComponent },
-    { path: 'myBoards', component: BoardListComponent }
-];
-
+  { path: 'kanbanboard', component: BoardComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'createuser', component: CreateuserComponent },
+  { path: 'myBoards', component: BoardListComponent },
+  { path: 'kanbanboard/:BoardID', component: BoardComponent }];
 @NgModule({
-    imports: [RouterModule.forRoot(routes)],
-    exports: [RouterModule]
+  imports: [RouterModule.forRoot(routes)],
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

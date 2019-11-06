@@ -1,9 +1,10 @@
+let connectedClients = [];
 
 let startWebsocket = function () {
     const { Server } = require('ws');
     const Kanban = require('./DataStructures.js');
 
-    let wsserver = new Server({ port: 80, path: '/Board' });
+    let wsserver = new Server({ port: 40, path: '/Board' });
 
     let boards = [
         new Kanban.Board(1, "Example", [
@@ -13,7 +14,7 @@ let startWebsocket = function () {
             [new Kanban.Card(5, "Card5 title", "content5", ["Johnny"], new Date(Date.now()), new Date(Date.now())), new Kanban.Card(11, "Card11 title", "This is the content11", ["Kurt", "Troels"], new Date(Date.now()), new Date(Date.now()))]
           ])
     ];
-    let connectedClients = [];
+  
 
     wsserver.on('connection', ws => {
         console.log('New client connected');
@@ -24,12 +25,13 @@ let startWebsocket = function () {
                     connectedClients.push({ Board: parsedMsg.BoardID, WebSocket: ws });
                     ws.send(JSON.stringify(boards.find(x => x.id === parsedMsg.BoardID)));
                 } else {
+                    console.log("Ive recieved the new board")
                     const newBoardState = JSON.parse(parsedMsg.newBoardState);
                     let currentBoardState = boards.find(x => x.id === newBoardState.id);
                     currentBoardState.readJson(newBoardState);
                     connectedClients.forEach(x => {
                         if (x.Board === newBoardState.id) {
-                            x.ws.send(JSON.stringify(newBoardState));
+                            x.WebSocket.send(JSON.stringify(newBoardState));
                         }
                     });
                 }
@@ -39,6 +41,8 @@ let startWebsocket = function () {
             }
         });
 
+      
+
         ws.on('close', (code, msg) => {
             console.log("Connection closing:", code, msg);
         });
@@ -47,7 +51,7 @@ let startWebsocket = function () {
             console.log(`An error occured. ${ws._socket.remoteAddress} caused the following error: ${event.message}`);
         }
     });
-}
+}  
 
 module.exports = {startWebsocket}
 

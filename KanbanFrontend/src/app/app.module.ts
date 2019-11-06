@@ -10,6 +10,7 @@ import { CreateuserComponent } from './createuser/createuser.component';
 import { CardComponent } from './card/card.component';
 import { BoardListComponent } from './board-list/board-list.component';
 
+
 @NgModule({
   declarations: [
     AppComponent,
