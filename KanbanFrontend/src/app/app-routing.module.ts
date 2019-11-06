@@ -2,14 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { BoardComponent } from './board/board.component';
 import { LoginComponent } from './login/login.component';
-import { BoardViewComponent } from './board-view/board-view.component';
+
+import { CreateuserComponent } from './createuser/createuser.component';
 
 
 const routes: Routes = [
-    { path: 'kanbanboard', component: BoardComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'boardView', component: BoardViewComponent }
-]
+  { path: 'kanbanboard', component: BoardComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'createuser', component: CreateuserComponent }];
 
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

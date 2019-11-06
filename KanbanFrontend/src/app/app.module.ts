@@ -1,11 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { FormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { CookieService } from 'ngx-cookie-service';
 import { BoardComponent } from './board/board.component';
 import { LoginComponent } from './login/login.component';
-import { BoardViewComponent } from './board-view/board-view.component';
+
+import { CreateuserComponent } from './createuser/createuser.component';
 import { CardComponent } from './card/card.component';
 
 @NgModule({
@@ -13,14 +15,16 @@ import { CardComponent } from './card/card.component';
     AppComponent,
     BoardComponent,
     LoginComponent,
-    BoardViewComponent,
+    CreateuserComponent,
+
     CardComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

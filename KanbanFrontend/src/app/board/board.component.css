@@ -1,9 +1,25 @@
 * {
-    box-sizing: border-box;
-  }
-  
-  .column {
-    float: left;
-    width: 250px;
-    padding: 10px;
-  }
+  box-sizing: border-box;
+}
+
+.column {
+  /* float: left; */
+  width: 250px;
+  padding: 10px;
+  /* border: 2px solid #ff0000; */
+  display: inline-table;
+}
+
+.row{
+  background-color: seagreen;
+  /* height: 600px; */
+  white-space: nowrap;
+  overflow: auto;
+}
+
+#b20{
+  width: 20%;
+}
+#i20{
+  width: 70%;
+}
