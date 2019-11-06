@@ -1,5 +1,5 @@
 import { Component, OnInit} from '@angular/core';
-import { send } from 'q';
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-board',
@@ -10,7 +10,7 @@ export class BoardComponent implements OnInit {
   WebSocket1: WebSocket
   kanbanBoard = new KanbanBoard();
 
-  constructor() {
+  constructor(private route: ActivatedRoute) {
   }
   
    methodInvoked(data){
@@ -19,9 +19,12 @@ export class BoardComponent implements OnInit {
   }
    
   ngOnInit() {
+    let boardid123 = this.route.snapshot.paramMap.get("BoardID");
+    let boardid1234 = +boardid123;
     this.WebSocket1 = new WebSocket("ws://localhost:40/Board");
-    let datatosend = JSON.stringify({messageType: "InitialMessage", BoardID: 1});
-    
+    console.log("is a:  "+boardid1234.valueOf);
+    let datatosend = JSON.stringify({messageType: "InitialMessage", BoardID: boardid1234});
+
     
     this.WebSocket1.onmessage = event =>{
       this.methodInvoked(event.data)
