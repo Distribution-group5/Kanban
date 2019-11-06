@@ -11,11 +11,6 @@ export class BoardListComponent implements OnInit {
 
   BoardList = [{ BoardID: '', Title: 'No boards found. Either login or create new board' }];
 
-  openBoard() {
-    window.location.href = "localhost:4200/kanbanboard";
-    console.log("Hallejua!");
-  }
-
   DeleteBoard(id) {
     fetch('http://localhost:8080/Board/DeleteBoard?BoardID=' + id, { method: 'POST' });
     window.location.reload();
