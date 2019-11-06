@@ -1,5 +1,5 @@
 class KanbanBoard {
-    constructor(id, Title, Columns) {
+    constructor(id, Title, Columns = []) {
       this.id = id;
       this.Title = Title;
       this.Columns = Columns;
