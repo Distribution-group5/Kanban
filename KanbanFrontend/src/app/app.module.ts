@@ -8,6 +8,8 @@ import { BoardComponent } from './board/board.component';
 import { LoginComponent } from './login/login.component';
 import { CreateuserComponent } from './createuser/createuser.component';
 import { CardComponent } from './card/card.component';
+;
+
 
 @NgModule({
   declarations: [

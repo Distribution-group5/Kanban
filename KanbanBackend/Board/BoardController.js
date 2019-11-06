@@ -56,6 +56,14 @@ boardRouter.post('/InviteToBoard', function (req, res, next) {
 
 });
 
+boardRouter.post('test', function (req, res) {
+    
+    console.log('test message recived');
+    console.log(req.body)
+    res.send("Can ye hear me?")
+
+});
+
 
 
 

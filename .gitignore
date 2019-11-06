@@ -12,6 +12,7 @@ KanbanBackend/.vs/KanbanBackend/v15/.suo
 .vs/slnx.sqlite
 .vs/Kanban/v16/.suo
 /node_modules
+/node_modules/
 /package-lock.json
 .vs/slnx.sqlite
 /KanbanBackend/DBInfo.txt
@@ -22,3 +23,5 @@ KanbanBackend/DBInfo.txt
 .vs/Kanban/v16/.suo
 .vs/Kanban/config/applicationhost.config
 /.vs
+KanbanBackend/node_modules/
+KanbanBackend/package-lock.json

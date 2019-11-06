@@ -12,4 +12,8 @@ app.use(cors());
 app.use(express.json());
 app.use('/Board', boardController);
 app.use('/User', userController);
+
 app.listen(8080);
+
+
+

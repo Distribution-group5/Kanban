@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, NgModule, Output, EventEmitter } from '@angular/core';
 import { FormsModule } from '@angular/forms'; 
-import { KanbanCard } from '../board/board.component';
+import { KanbanCard, KanbanBoard, BoardComponent } from '../board/board.component';
 
 @Component({
     selector: 'app-card',
@@ -16,9 +16,7 @@ export class CardComponent implements OnInit {
 
     @Input() card: KanbanCard;
     @Output() cardUpdate = new EventEmitter<KanbanCard>();
-
     raiseCardUpdate() {
-        console.log(this.card);
         this.cardUpdate.emit(this.card);
     }
 
@@ -29,9 +27,11 @@ export class CardComponent implements OnInit {
 
 
     constructor() {
-
     }
 
     ngOnInit() {
     }
+
+   
 }
+

@@ -8,7 +8,8 @@ import { CreateuserComponent } from './createuser/createuser.component';
 const routes: Routes = [
   { path: 'kanbanboard', component: BoardComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'createuser', component: CreateuserComponent }];
+  { path: 'createuser', component: CreateuserComponent },
+  { path: 'kanbanboard/:BoardID', component: BoardComponent }];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

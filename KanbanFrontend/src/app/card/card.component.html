@@ -7,5 +7,13 @@
     <h5>Assignee(s)</h5>
     <textarea (keyup)="autogrow($event)" [(ngModel)]="card.Assignees" (input)="raiseCardUpdate()">{{card.Assignees}}</textarea>
     <h5>Date Created</h5>
-    <div id="Date">{{card.DateCreated}}</div>
+    <div id="Date">{{card.DateCreated}}
+    </div>
+
+  <!--
+    <h4>{{card.Title}}</h4>
+        <p>{{card.Content}}</p>
+        <p>Assignees: {{card.Assignees}} <br>
+        Date created: {{DateCreated}}</p>
+      -->
 </div>
