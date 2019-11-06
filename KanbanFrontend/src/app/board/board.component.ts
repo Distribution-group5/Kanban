@@ -14,11 +14,8 @@ export class BoardComponent implements OnInit {
   }
   
    methodInvoked(data){
-    //console.log("CALLBACK VIRKER" + data);
     let data1 = JSON.parse(data);
     this.kanbanBoard = Object.assign(new KanbanBoard(), data1);
-    //console.log(this.kanbanBoard);
-    //this.kanbanBoard = data1;
   }
    
   ngOnInit() {
@@ -27,9 +24,7 @@ export class BoardComponent implements OnInit {
     
     
     this.WebSocket1.onmessage = event =>{
-      //console.log(event.data);
       this.methodInvoked(event.data)
-      //console.log("hej");
       };
     this.WebSocket1.onopen = () => this.WebSocket1.send(datatosend);
   }
@@ -119,8 +114,7 @@ export class BoardComponent implements OnInit {
         }
       }
     }
-    
-    //console.log(theCard);
+
   }
 
   deleteCard(theCard:KanbanCard){
@@ -147,23 +141,6 @@ export class BoardComponent implements OnInit {
   readJson(json) {
     Object.assign(this, json);
   }
-   
-   getKanbancard(theCard:KanbanCard){
-     for(let column in this.Columns){
-       for(let card in this.Columns[column]){
-        //console.log(this.Columns[column][card].id);
-         if(this.Columns[column][card].id=== theCard.id){
-           console.log("hello0.99")
-          console.log(theCard);
-          console.log("hello1");
-          console.log(this.Columns[column][card]);
-          this.Columns[column][card] = theCard;
-         }
-       }
-     }
-     
-    
-   }
 }
 
 export class KanbanCard {
