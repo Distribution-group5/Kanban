@@ -22,6 +22,12 @@ export class BoardListComponent implements OnInit {
     window.location.reload();
   }
 
+  addExistingBoard(data){
+    let username = this.cookie.get("data");
+    fetch(`http://localhost:8080/Board/InviteToBoard?username=${username}&boardid=${data.BoardID}`, { method: 'POST' });
+    window.location.reload();
+  }
+
   constructor(private cookie: CookieService) { }
 
   async ngOnInit() {

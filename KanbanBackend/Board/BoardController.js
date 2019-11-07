@@ -87,8 +87,9 @@ boardRouter.post('/CreateBoard', function (req, res, next) {
 });
 
 boardRouter.post('/InviteToBoard', function (req, res, next) {
-    let boardid = req.body.BoardID;
-    let username = req.body.Username;
+    let boardid = req.query.boardid;
+    let username = req.query.username;
+
     console.log(`Inviting to board: ${boardid} user: ${username}`);
     let con = mysql.createConnection({
         host: dbInfoArray[0],

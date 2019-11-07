@@ -4,10 +4,16 @@
     Board ID: {{board.BoardID}} Title: {{board.Title}} <a href="http://localhost:4200/kanbanboard/{{board.BoardID}}">Open</a>
     <button (click)="DeleteBoard(board.BoardID)">Delete</button>
   </li>
-  <li>
-    <form #newBoard="ngForm" (ngSubmit)="CreateBoard(newBoard.value)">
-      <input type="text" name="title" placeholder="Title" ngModel>
-      <input type="submit" value="submit">
-    </form>
-  </li>
 </ul>
+<br>
+<form #newBoard="ngForm" (ngSubmit)="CreateBoard(newBoard.value)">
+  Create board<br>
+  <input type="text" name="title" placeholder="Title" ngModel>
+  <input type="submit" value="submit">
+</form><br>
+
+<form #existingBoard="ngForm" (ngSubmit)="addExistingBoard(existingBoard.value)">
+  Add an existing board<br>
+  <input type="text" name="BoardID" placeholder="BoardID" ngModel>
+  <input type="submit" value="submit">
+</form>
