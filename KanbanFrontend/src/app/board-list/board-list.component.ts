@@ -19,6 +19,13 @@ export class BoardListComponent implements OnInit {
   CreateBoard(data) {
     let username = this.cookie.get("data");
     fetch(`http://localhost:8080/Board/CreateBoard?username=${username}&title=${data.title}`, { method: 'POST' });
+    window.location.reload();
+  }
+
+  addExistingBoard(data){
+    let username = this.cookie.get("data");
+    fetch(`http://localhost:8080/Board/InviteToBoard?username=${username}&boardid=${data.BoardID}`, { method: 'POST' });
+    window.location.reload();
   }
 
   constructor(private cookie: CookieService) { }
