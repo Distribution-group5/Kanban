@@ -73,7 +73,8 @@ let startWebsocket = function () {
                         ws.send(resultString);
                     }
                 } else {
-                    console.log("Ive recieved the new board")
+                    console.log("Ive recieved the new board");
+                    console.log("Length of board object: ", parsedMsg.newBoardState.length);
                     const newBoardState = JSON.parse(parsedMsg.newBoardState);
                     let currentBoardState = boards.find(x => x.id === newBoardState.id);
                     Object.assign(currentBoardState, newBoardState);
