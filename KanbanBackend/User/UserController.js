@@ -39,7 +39,7 @@ userRouter.post('/loginTest', function(req,res){
         username: 'Kimse',
         email: 'test@test.com'
     }
-    jwt.sign({user: user},'secretkey', (err,token)=>{
+    jwt.sign({user: user},'secretkey', { expiresIn: '1h'}, (err,token)=>{
         res.json({
             token: token
         });
@@ -68,8 +68,13 @@ userRouter.post('/login', function (req, res, next){
             if(err) next(err)
         else{
             if(result.length > 0){
-                res.send({ username: `${username}` })
-                console.log("Sending 200 back")
+                jwt.sign({user: `${username}`},'secretkey', { expiresIn: '1h'}, (err,token)=>{
+                    res.json({
+                        token: token
+                    });
+                });
+                
+
 
             }
             else{

@@ -7,6 +7,7 @@ let dbInfo = fs.readFileSync('./DBInfo.txt', 'utf8');
 let dbInfoArray = dbInfo.split(",");
 
 boardRouter.post('/DeleteBoard', verifyToken, function (req, res, next) {
+    
     jwt.verify(req.token, 'secretkey', (err,authData)=>{
         if(err){
             res.sendStatus(403);
@@ -18,6 +19,9 @@ boardRouter.post('/DeleteBoard', verifyToken, function (req, res, next) {
             });
         }
     })
+    if(res.statusCode == 403){
+        return
+    }
     let boardid = req.query.BoardID;
     console.log("Trying to delete board:", boardid);
     let con = mysql.createConnection({
