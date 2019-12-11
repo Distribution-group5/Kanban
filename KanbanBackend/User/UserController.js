@@ -2,6 +2,7 @@ var express = require('express');
 var userRouter = express.Router();
 const fs = require('fs');
 const mysql = require('mysql');
+const jwt = require('jsonwebtoken');
 let dbInfo = fs.readFileSync('./DBInfo.txt', 'utf8');
 let dbInfoArray = dbInfo.split(",");
 userRouter.put('/CreateUser', function (req, res, next) {
@@ -30,6 +31,20 @@ userRouter.put('/CreateUser', function (req, res, next) {
             }
         });
     });
+});
+
+userRouter.post('/loginTest', function(req,res){
+    const user = {
+        id: 1,
+        username: 'Kimse',
+        email: 'test@test.com'
+    }
+    jwt.sign({user: user},'secretkey', (err,token)=>{
+        res.json({
+            token: token
+        });
+    });
+
 });
 
 userRouter.post('/login', function (req, res, next){

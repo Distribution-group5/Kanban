@@ -1,11 +1,23 @@
 const express = require('express');
+const jwt = require('jsonwebtoken');
 const boardRouter = express.Router();
 const fs = require('fs');
 const mysql = require('mysql');
 let dbInfo = fs.readFileSync('./DBInfo.txt', 'utf8');
 let dbInfoArray = dbInfo.split(",");
 
-boardRouter.post('/DeleteBoard', function (req, res, next) {
+boardRouter.post('/DeleteBoard', verifyToken, function (req, res, next) {
+    jwt.verify(req.token, 'secretkey', (err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }
+        else{
+            res.json({
+                message: 'Correct Token',
+                authData
+            });
+        }
+    })
     let boardid = req.query.BoardID;
     console.log("Trying to delete board:", boardid);
     let con = mysql.createConnection({
@@ -121,7 +133,25 @@ boardRouter.post('test', function (req, res) {
 
 });
 
+//
 
+//Verify Token
+function verifyToken(req, res, next){
+    //Get auth header value
+    const bearerHeader = req.headers['authorization'];
+    // Check is there is a token
 
+    if(typeof bearerHeader !== 'undefined'){
+        // Getting the token
+        const bearer = bearerHeader.split(' ');
+        const bearerToken = bearer[1];
+        req.token = bearerToken;
+        next();
+    }
+    else{
+        //Deny access
+        res.sendStatus(403);
+    }
+}
 
 module.exports = boardRouter;
