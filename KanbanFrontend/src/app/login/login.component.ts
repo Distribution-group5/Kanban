@@ -28,6 +28,7 @@ export class LoginComponent implements OnInit {
       let decodedTokenTest = this.getDecodedAccessToken(data.token)
       //We display some HTML to show the user it worked
       this.status = `ACCESS GRANTED USER: ${decodedTokenTest.user} `
+      window.location.href = 'http://localhost:4200/myBoards';
       }
       else{
         // If user + password didn't exist

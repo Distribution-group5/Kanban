@@ -50,6 +50,9 @@ export class BoardListComponent implements OnInit {
 
   async ngOnInit() {
     this.token = window.localStorage.getItem('Authorization');
+    if(window.localStorage.getItem('Authorization') !== undefined &&  this.getDecodedAccessToken(this.token) !== null){
+
+    
     let tokenToUse = this.token
     let decodedToken = this.getDecodedAccessToken(this.token)
     console.log(decodedToken)
@@ -64,13 +67,16 @@ export class BoardListComponent implements OnInit {
           'Authorization': 'Bearer ' + tokenToUse
         }
       });
+      if(response.status===403){
+        window.location.href = 'http://localhost:4200/login';
+      }
       try {
         //We turn the response into an json object
-        console.log('RESPONSE' + response)
+        console.log('RESPONSE' + response.status)
         return await response.json();
       }
       catch (error) {
-        console.log('RESPONSE' + response)
+        console.log('RESPONSE' + response.status)
         //We return undefined if the server didn't find a match with user+pass
         return undefined
       }
@@ -89,6 +95,11 @@ export class BoardListComponent implements OnInit {
       }
     }
   }
+  else{
+    console.log('Need Correct Token')
+    window.location.href = 'http://localhost:4200/login';
+  }
+}
 
   getDecodedAccessToken(token: string): any {
     try{

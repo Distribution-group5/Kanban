@@ -10,13 +10,11 @@ boardRouter.post('/DeleteBoard', verifyToken, function (req, res, next) {
     
     jwt.verify(req.token, 'secretkey', (err,authData)=>{
         if(err){
+            console.log('incorrect')
             res.sendStatus(403);
         }
         else{
-            res.json({
-                message: 'Correct Token',
-                authData
-            });
+            console.log('incorrect')
         }
     })
     if(res.statusCode == 403){
@@ -89,13 +87,11 @@ ttp://localhost:8080/Board/CreateBoard?username=user1&title=Test
 boardRouter.post('/CreateBoard', verifyToken, function (req, res, next) {
     jwt.verify(req.token, 'secretkey', (err,authData)=>{
         if(err){
+            console.log('incorrect')
             res.sendStatus(403);
         }
         else{
-            res.json({
-                message: 'Correct Token',
-                authData
-            });
+            console.log('incorrect')
         }
     })
     if(res.statusCode == 403){
@@ -132,13 +128,11 @@ boardRouter.post('/CreateBoard', verifyToken, function (req, res, next) {
 boardRouter.post('/InviteToBoard', verifyToken, function (req, res, next) {
     jwt.verify(req.token, 'secretkey', (err,authData)=>{
         if(err){
+            console.log('incorrect')
             res.sendStatus(403);
         }
         else{
-            res.json({
-                message: 'Correct Token',
-                authData
-            });
+            console.log('incorrect')
         }
     })
     if(res.statusCode == 403){
@@ -195,6 +189,7 @@ function verifyToken(req, res, next){
     }
     else{
         //Deny access
+        console.log(bearerHeader)
         res.sendStatus(403);
     }
 }
