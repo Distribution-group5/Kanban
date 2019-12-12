@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
       formData = JSON.stringify(formData)
       //We call out method which will send the request with an url and our json string
       //data is the response from the server
-      const data = await postData('http://localhost:8080/user/login/',formData);
+      const data = await postData('https://localhost:8443/user/login/',formData);
       //If data is not undefined, which means the user + password combo did exist
         console.log(data);
         if (data != undefined) {
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
       let decodedTokenTest = this.getDecodedAccessToken(data.token)
       //We display some HTML to show the user it worked
       this.status = `ACCESS GRANTED USER: ${decodedTokenTest.user} `
-      window.location.href = 'http://localhost:4200/myBoards';
+      window.location.href = 'https://localhost:4200/myBoards';
       }
       else{
         // If user + password didn't exist

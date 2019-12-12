@@ -16,7 +16,7 @@ export class BoardListComponent implements OnInit {
 
   DeleteBoard(id) {
     let tokenToUse = this.token
-    fetch('http://localhost:8080/Board/DeleteBoard?BoardID=' + id, { method: 'POST',
+    fetch('https://localhost:8443/Board/DeleteBoard?BoardID=' + id, { method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenToUse,
@@ -27,7 +27,7 @@ export class BoardListComponent implements OnInit {
   CreateBoard(data) {
     let username = this.username
     let tokenToUse = this.token
-    fetch(`http://localhost:8080/Board/CreateBoard?username=${username}&title=${data.title}`, { method: 'POST',
+    fetch(`https://localhost:8443/Board/CreateBoard?username=${username}&title=${data.title}`, { method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenToUse,
@@ -38,7 +38,7 @@ export class BoardListComponent implements OnInit {
   addExistingBoard(data){
     let username = this.username;
     let tokenToUse = this.token
-    fetch(`http://localhost:8080/Board/InviteToBoard?username=${username}&boardid=${data.BoardID}`, { method: 'POST',
+    fetch(`https://localhost:8443/Board/InviteToBoard?username=${username}&boardid=${data.BoardID}`, { method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenToUse
@@ -68,7 +68,7 @@ export class BoardListComponent implements OnInit {
         }
       });
       if(response.status===403){
-        window.location.href = 'http://localhost:4200/login';
+        window.location.href = 'https://localhost:4200/login';
       }
       try {
         //We turn the response into an json object
@@ -82,7 +82,7 @@ export class BoardListComponent implements OnInit {
       }
     }
 
-    const boards = await getData('http://localhost:8080/Board/GetBoards?username=' + this.username);
+    const boards = await getData('https://localhost:8443/Board/GetBoards?username=' + this.username);
   
     
     if (boards != undefined) {
@@ -97,7 +97,7 @@ export class BoardListComponent implements OnInit {
   }
   else{
     console.log('Need Correct Token')
-    window.location.href = 'http://localhost:4200/login';
+    window.location.href = 'https://localhost:4200/login';
   }
 }
 
