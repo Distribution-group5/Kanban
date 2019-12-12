@@ -46,7 +46,20 @@ boardRouter.post('/DeleteBoard', verifyToken, function (req, res, next) {
 
 });
 
-boardRouter.get('/GetBoards', function (req, res, next) {
+boardRouter.get('/GetBoards', verifyToken, function (req, res, next) {
+    jwt.verify(req.token, 'secretkey', (err)=>{
+        if(err){
+            console.log('incorrect')
+            res.sendStatus(403);
+        }
+        else{
+            console.log('incorrect')
+        }
+    })
+    if(res.statusCode == 403){
+        console.log('incorrect')
+        return
+    }
     let username = req.query.username;
     console.log("Trying to get boards for:", username);
     let con = mysql.createConnection({
@@ -73,7 +86,21 @@ boardRouter.get('/GetBoards', function (req, res, next) {
 });
 
 ttp://localhost:8080/Board/CreateBoard?username=user1&title=Test
-boardRouter.post('/CreateBoard', function (req, res, next) {
+boardRouter.post('/CreateBoard', verifyToken, function (req, res, next) {
+    jwt.verify(req.token, 'secretkey', (err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }
+        else{
+            res.json({
+                message: 'Correct Token',
+                authData
+            });
+        }
+    })
+    if(res.statusCode == 403){
+        return
+    }
     let username = req.query.username;
     let title = req.query.title;
     let boardID = Math.floor(Math.random() * 2000000000);
@@ -102,7 +129,21 @@ boardRouter.post('/CreateBoard', function (req, res, next) {
     });
 });
 
-boardRouter.post('/InviteToBoard', function (req, res, next) {
+boardRouter.post('/InviteToBoard', verifyToken, function (req, res, next) {
+    jwt.verify(req.token, 'secretkey', (err,authData)=>{
+        if(err){
+            res.sendStatus(403);
+        }
+        else{
+            res.json({
+                message: 'Correct Token',
+                authData
+            });
+        }
+    })
+    if(res.statusCode == 403){
+        return
+    }
     let boardid = req.query.boardid;
     let username = req.query.username;
 
