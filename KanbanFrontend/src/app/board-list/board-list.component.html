@@ -1,7 +1,7 @@
 
 <ul>
   <li *ngFor="let board of BoardList">
-    Board ID: {{board.BoardID}} Title: {{board.Title}} <a href="http://localhost:4200/kanbanboard/{{board.BoardID}}">Open</a>
+    Board ID: {{board.BoardID}} Title: {{board.Title}} <a href="https://localhost:4200/kanbanboard/{{board.BoardID}}">Open</a>
     <button (click)="DeleteBoard(board.BoardID)">Delete</button>
   </li>
 </ul>
