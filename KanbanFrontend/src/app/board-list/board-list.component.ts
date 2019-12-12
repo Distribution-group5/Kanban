@@ -16,11 +16,13 @@ export class BoardListComponent implements OnInit {
 
   DeleteBoard(id) {
     let tokenToUse = this.token
+    console.log('token is ' + id)
     fetch('https://localhost:8443/Board/DeleteBoard?BoardID=' + id, { method: 'POST',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenToUse,
     } });
+    this.wait(2000);
     window.location.reload();
   }
 
@@ -32,6 +34,7 @@ export class BoardListComponent implements OnInit {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenToUse,
     } });
+    this.wait(2000);
     window.location.reload();
   }
 
@@ -43,6 +46,7 @@ export class BoardListComponent implements OnInit {
       'Content-Type': 'application/json',
       'Authorization': 'Bearer ' + tokenToUse
     } });
+    this.wait(2000);
     window.location.reload();
   }
 
@@ -97,10 +101,18 @@ export class BoardListComponent implements OnInit {
   }
   else{
     console.log('Need Correct Token')
+    this.wait(2000);
     window.location.href = 'https://localhost:4200/login';
   }
 }
 
+wait(ms){
+  var start = new Date().getTime();
+  var end = start;
+  while(end < start + ms){
+    end = new Date().getTime();
+  }
+}
   getDecodedAccessToken(token: string): any {
     try{
         return jwt_decode(token);

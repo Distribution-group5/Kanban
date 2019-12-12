@@ -8,9 +8,9 @@ let dbInfoArray = dbInfo.split(",");
 
 boardRouter.post('/DeleteBoard', verifyToken, function (req, res, next) {
     
-    jwt.verify(req.token, 'secretkey', (err,authData)=>{
+    jwt.verify(req.token, 'secretkey', (err)=>{
         if(err){
-            console.log('incorrect')
+            console.log('incorrects')
             res.sendStatus(403);
         }
         else{
@@ -18,6 +18,7 @@ boardRouter.post('/DeleteBoard', verifyToken, function (req, res, next) {
         }
     })
     if(res.statusCode == 403){
+        console.log('TEST')
         return
     }
     let boardid = req.query.BoardID;
@@ -85,7 +86,7 @@ boardRouter.get('/GetBoards', verifyToken, function (req, res, next) {
 
 ttp://localhost:8080/Board/CreateBoard?username=user1&title=Test
 boardRouter.post('/CreateBoard', verifyToken, function (req, res, next) {
-    jwt.verify(req.token, 'secretkey', (err,authData)=>{
+    jwt.verify(req.token, 'secretkey', (err)=>{
         if(err){
             console.log('incorrect')
             res.sendStatus(403);
@@ -126,7 +127,7 @@ boardRouter.post('/CreateBoard', verifyToken, function (req, res, next) {
 });
 
 boardRouter.post('/InviteToBoard', verifyToken, function (req, res, next) {
-    jwt.verify(req.token, 'secretkey', (err,authData)=>{
+    jwt.verify(req.token, 'secretkey', (err)=>{
         if(err){
             console.log('incorrect')
             res.sendStatus(403);
