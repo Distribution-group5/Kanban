@@ -20,7 +20,7 @@ let startWebsocket = function () {
 
 
     setInterval(() => {
-        boards.forEach(x => saveBoard(x));
+        //boards.forEach(x => saveBoard(x.BoardObject));
     }, 60000);
 
     wsserver.on('connection', ws => {
@@ -31,7 +31,10 @@ let startWebsocket = function () {
                 if (parsedMsg.messageType === 'InitialMessage') {
                     console.log("before getBoard");
                     let targetBoardID = parsedMsg.BoardID;
-                    let foundBoard = boards.find(x => x.id === targetBoardID);
+                    let foundBoard;
+                    if (boards[targetBoardID] != undefined) {
+                        foundBoard = boards[targetBoardID].BoardObject;
+                    }
                     connectedClients.push({ Board: targetBoardID, WebSocket: ws });
                     console.log("foundBoard: " + foundBoard);
                     if (foundBoard === undefined) {
@@ -53,18 +56,21 @@ let startWebsocket = function () {
                                 else {
                                     console.log("Gotten board");
                                     let b;
+                                    let boardAsString;
                                     try {
-                                        let boardAsString;
+                                        
                                         Object.keys(result).forEach(function (key) {
                                             var row = result[key];
                                             boardAsString = row.BoardObject;
                                         });
                                         b = Object.assign(new Kanban.Board(), JSON.parse(boardAsString));
+                                        boardAsString = JSON.stringify(b);
                                     } catch (e) {
                                         b = new Kanban.Board(targetBoardID);
+                                        boardAsString = JSON.stringify(b);
                                     }
-                                    boards.push(b);
-                                    ws.send(JSON.stringify(boards.find(x => x.id === targetBoardID)));
+                                    boards[b.id] = { BoardObject: b, BoardAsString: boardAsString };
+                                    ws.send(JSON.stringify(boards[targetBoardID].BoardObject));
                                 }
                             });
                         });
@@ -75,12 +81,27 @@ let startWebsocket = function () {
                 } else {
                     console.log("Ive recieved the new board");
                     console.log("Length of board object: ", parsedMsg.newBoardState.length);
-                    const newBoardState = JSON.parse(parsedMsg.newBoardState);
-                    let currentBoardState = boards.find(x => x.id === newBoardState.id);
-                    Object.assign(currentBoardState, newBoardState);
+                    
+                    let boardStateDiff = JSON.parse(parsedMsg.newBoardState);
+                    let currentBoardStateAsString = boards[boardStateDiff.id].BoardAsString;
+                    //console.log("");
+                    //console.log("Current:", currentBoardStateAsString);
+                    //console.log("");
+                    let beforePartToRemove = currentBoardStateAsString.slice(0, boardStateDiff.first);
+                    //console.log("beforePartToRemove: \n", beforePartToRemove);
+                    let afterPartToRemove = currentBoardStateAsString.slice(currentBoardStateAsString.length - boardStateDiff.last + 1);
+                    //console.log("\nDiff:\n", boardStateDiff.diff);
+                    //console.log("\nafterPartToRemove:\n", afterPartToRemove)
+                    let newBoardStateAsString = beforePartToRemove + boardStateDiff.diff + afterPartToRemove;
+
+                    //console.log("Trying to parse[91]:", newBoardStateAsString);
+                    const newBoardState = JSON.parse(newBoardStateAsString);
+
+                    boards[boardStateDiff.id].BoardAsString = newBoardStateAsString;
+                    Object.assign(boards[boardStateDiff.id].BoardObject, newBoardState);
                     connectedClients.forEach(x => {
                         if (x.Board === newBoardState.id) {
-                            x.WebSocket.send(JSON.stringify(newBoardState));
+                            x.WebSocket.send(parsedMsg.newBoardState);
                         }
                     });
                 }
