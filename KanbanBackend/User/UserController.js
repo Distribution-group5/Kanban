@@ -26,11 +26,15 @@ userRouter.put('/CreateUser', function (req, res, next) {
         if (err) next(err);
         let sql = `INSERT INTO Users VALUES ('${username}', '${hashedpassword}');`;
         console.log("Connected!");
+        console.log(sql);
         con.query(sql, function (err, result) {
             if (err){
+                console.log("test12")
+                console.log(result)
                 console.log('USER ALREADY EXISTS')
             }
             else {
+                console.log(result)
                 console.log(`User created: ${username}`);
                 //I have changed the method under to send a json object back
                 res.send({ username: `${username}` })
@@ -64,10 +68,14 @@ userRouter.post('/login', function (req, res, next){
         else{
             console.log("hej")
             console.log(result);
+            //console.log(fields);
+            console.log(result.length);
             if(result.length > 0){
-                console.log(result);
-                console.log("All this data ^")
                 testpassword = result[0].Password;
+                console.log("testpassword: " + testpassword)
+                console.log(password + " this ma password")
+                console.log("username: ")
+                console.log(username)
                 bcrypt.compare(password, testpassword, function(err, result) {
                     console.log("Right password? " + result)
                     if(result === true){
