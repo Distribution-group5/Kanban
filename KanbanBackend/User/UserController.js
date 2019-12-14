@@ -62,7 +62,11 @@ userRouter.post('/login', function (req, res, next){
         con.query(sql, function(err, result, fields){
             if(err) next(err)
         else{
+            console.log("hej")
+            console.log(result);
             if(result.length > 0){
+                console.log(result);
+                console.log("All this data ^")
                 testpassword = result[0].Password;
                 bcrypt.compare(password, testpassword, function(err, result) {
                     console.log("Right password? " + result)
@@ -79,6 +83,7 @@ userRouter.post('/login', function (req, res, next){
 
             }
             else{
+                console.log("test1")
                 res.status(403).send()
                 console.log("Sending 403 back")
             }
