@@ -58,24 +58,14 @@ userRouter.post('/login', function (req, res, next){
     con.connect(function(err){
         console.log(req.body)
         if (err) next (err)
-        let sql = `SELECT * FROM Users WHERE username = '${username}'`;
-        // AND password = '${password}'`;
+        let sql = 'SELECT * FROM Users WHERE username = ' + con.escape(username);
         console.log(sql)
-
         
         con.query(sql, function(err, result, fields){
             if(err) next(err)
         else{
-            console.log("hej")
-            console.log(result);
-            //console.log(fields);
-            console.log(result.length);
             if(result.length > 0){
                 testpassword = result[0].Password;
-                console.log("testpassword: " + testpassword)
-                console.log(password + " this ma password")
-                console.log("username: ")
-                console.log(username)
                 bcrypt.compare(password, testpassword, function(err, result) {
                     console.log("Right password? " + result)
                     if(result === true){
@@ -91,7 +81,6 @@ userRouter.post('/login', function (req, res, next){
 
             }
             else{
-                console.log("test1")
                 res.status(403).send()
                 console.log("Sending 403 back")
             }

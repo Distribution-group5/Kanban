@@ -30,7 +30,7 @@ boardRouter.post('/DeleteBoard', function (req, res, next) {
 
 });
 
-boardRouter.get('/GetBoards', function (req, res, next) {
+ boardRouter.get('/GetBoards', function (req, res, next) {
     let username = req.query.username;
     console.log("Trying to get boards for:", username);
     let con = mysql.createConnection({
@@ -42,7 +42,7 @@ boardRouter.get('/GetBoards', function (req, res, next) {
 
     con.connect(function (err) {
         if (err) next(err);
-        let sql = `SELECT ubr.*, board.* FROM UserBoardRelation ubr LEFT JOIN Board board on ubr.BoardID = board.BoardID WHERE ubr.Username = '${username}';`;
+        let sql = 'SELECT ubr.*, board.* FROM UserBoardRelation ubr LEFT JOIN Board board on ubr.BoardID = board.BoardID WHERE ubr.Username = ' + con.escape(username);
         console.log("Connected!");
         con.query(sql, function (err, result) {
             if (err) next(err)
